@@ -1,0 +1,30 @@
+.login {
+  height: 100vh;
+  width: 100vw;
+  background-color: #222;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  button {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    background-color: black;
+    border: none;
+    padding: 20px;
+    max-height: 100px;
+    border-radius: 15px;
+    color: white;
+    font-size: 48px;
+    outline: none;
+    &:hover {
+      cursor: pointer;
+    }
+    img {
+      height: 60px;
+      margin-right: 15px;
+    }
+  }
+  
+}

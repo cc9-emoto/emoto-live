@@ -1,0 +1,28 @@
+.dashboard {
+  height: 100vh;
+  display: grid;
+  grid-template-columns: 4fr 1fr;
+  grid-template-rows: 1fr 85px;
+  background-color: black;
+}
+.dashboard__top {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.dashboard__main {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.dashboard__emotionValue {
+  padding: 10px 25px;
+  background-color: black;
+  color: white;
+  position: absolute;
+  top: 75px;
+  left: 25px;
+  border-radius: 10px;
+  z-index: 3;
+}

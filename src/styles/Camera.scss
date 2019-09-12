@@ -1,0 +1,16 @@
+.camera {
+  height: 250px;
+  width: 250px;
+  display: flex;
+  align-items: center;
+  border-radius: 250px;
+  border: 10px solid white;
+  overflow: hidden;
+  position: absolute;
+  z-index: 3;
+  video {
+    height: 500px;
+    width: 500px;
+    margin-left: -130px;
+  }
+}
