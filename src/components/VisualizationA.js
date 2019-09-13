@@ -23,10 +23,10 @@ const VisualizationA = ({ position }) => {
   }
 
   const draw = () => {
-    ctx.current.clearRect(0, 0, canvas.current.width, canvas.current.height);
+    ctx.current.clearRect(0, 0, canvas.current.width, canvas.current.height);    
     for (let i = 0; i < 100; i++) {
       for (let j = 0; j < 100; j++) {
-        drawCircle(i*25 + Math.sin(position + i)*5, j*25 + Math.sin(position+j)*5, 3);
+        drawCircle(i*25 + (Math.sin(position + i))*5, j*25 + (Math.sin(position+j))*5, 3);
       }
     }
   }

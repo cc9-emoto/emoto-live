@@ -7,12 +7,16 @@ const Camera = ({ setEmotionValue }) => {
   const webcam = useRef(null);
   const videoConstraints = { width: 450, height: 250, facingMode: "user" };
 
+  useEffect(() => {
+    setInterval(updateEmotionValue, 10000);
+  }, [])
+
   const submitData = async (base64) => {
     const response = await axios.post("http://localhost:4000/azure", { base64, userID: "test" });
     return response.data;
   };
 
-  const setEmotion = async () => {
+  const updateEmotionValue = async () => {
     const webcamData = webcam.current.getScreenshot();
     const feelings = await submitData(webcamData);
     setEmotionValue(feelings.happiness + 0.5 * feelings.neutral);

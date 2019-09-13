@@ -5,16 +5,12 @@
   grid-template-rows: 1fr 85px;
   background-color: black;
 }
-.dashboard__top {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
 .dashboard__main {
   flex: 1;
   display: flex;
   align-items: center;
   justify-content: center;
+  position: relative;
 }
 .dashboard__emotionValue {
   padding: 10px 25px;

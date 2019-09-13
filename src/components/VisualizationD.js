@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef} from 'react';
 import "../styles/Visualization.scss"
+import colorHelper from '../helpers/colorHelper'
 
 const VisualizationB = ({ position, beatsData, color, playerPlaying }) => {
   const canvas = useRef();
@@ -15,6 +16,7 @@ const VisualizationB = ({ position, beatsData, color, playerPlaying }) => {
     canvas.current.setAttribute('width', container.scrollWidth);
     canvas.current.setAttribute('height', container.scrollHeight);
     ctx.current = canvas.current.getContext('2d');
+    ctx.current.translate(canvas.current.width / 2, canvas.current.height / 2)
     draw();
   }, [])
 
@@ -31,13 +33,14 @@ const VisualizationB = ({ position, beatsData, color, playerPlaying }) => {
     }
   }, [beatsData, playerPlaying]);
 
-  const drawRectangle = (x, y, height) => {
+  const drawRectangle = (x, y, height, i) => {
     ctx.current.beginPath();
+    ctx.current.rotate(Math.PI / i);
     ctx.current.rect(x, y, 5, height);
     ctx.current.fillStyle = `#${color}`;
     ctx.current.fill();
   }
-
+  
   const animate = () => {
     const timestamp = Date.now();
     const recurse = () => {
@@ -50,11 +53,11 @@ const VisualizationB = ({ position, beatsData, color, playerPlaying }) => {
     }
     recurse();
   }
-  
+
   const draw = () => {
     ctx.current.clearRect(0, 0, canvas.current.width, canvas.current.height);
     for (let i = 0; i < 100; i++) {
-      drawRectangle(i*15, 0 , (Math.sin(i + counter.current/120) + 1.25) * 400);
+      drawRectangle(0, 0, (Math.sin(counter.current/30) + 1) * 200 * Math.random(), i);
     }
     counter.current = counter.current + 1;
   }

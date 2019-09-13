@@ -1,11 +1,10 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect } from 'react';
 import axios from 'axios';
 import Cookies from 'js-cookie'
 import "../styles/Player.scss"
 
-const Player = ({ playerState, setPlayerState }) => {
-  const player = useRef(null);
-
+const Player = ({ playerState, setPlayerState, player }) => {
+  
   const requestNewToken = async () => {
     const refreshToken = Cookies.get("emoto-refresh");
     const response = await axios.post("http://localhost:4000/spotify/reauthorize", { refreshToken });
@@ -53,7 +52,7 @@ const Player = ({ playerState, setPlayerState }) => {
   useEffect(() => { init() }, [])
 
   if (playerState) {
-    const { position, duration, paused } = playerState
+    const { position, duration, paused } = playerState;
     const { album, artists, name } = playerState.track_window.current_track
     return (
       <div className="player">
@@ -72,7 +71,7 @@ const Player = ({ playerState, setPlayerState }) => {
           </div>
           <div className="player__controls">
             <button onClick={() => player.current.previousTrack()}>PREVIOUS</button>
-            {paused ? <button onClick={() => player.current.resume()}>PLAY</button> : <button onClick={() => player.current.pause()}>PAUSE</button> }
+            { paused ? <button onClick={() => player.current.resume()}>PLAY</button> : <button onClick={() => player.current.pause()}>PAUSE</button> }
             <button onClick={() => player.current.nextTrack()}>NEXT</button>
           </div>
         </div>
