@@ -1,6 +1,10 @@
 import React, { useEffect } from 'react';
 import axios from 'axios';
 import Cookies from 'js-cookie'
+import back from '../assets/images/back.svg'
+import skip from '../assets/images/skip.svg'
+import play from '../assets/images/play.svg'
+import pause from '../assets/images/pause.svg'
 import "../styles/Player.scss"
 
 const Player = ({ playerState, setPlayerState, player, playlist }) => {
@@ -70,16 +74,27 @@ const Player = ({ playerState, setPlayerState, player, playlist }) => {
             </div>
           </div>
           <div className="player__controls">
-            <button onClick={() => player.current.previousTrack()}>PREVIOUS</button>
-            { paused ? <button onClick={() => player.current.resume()}>PLAY</button> : <button onClick={() => player.current.pause()}>PAUSE</button> }
-            <button onClick={() => player.current.nextTrack()}>NEXT</button>
+            <button onClick={() => player.current.previousTrack()}><img src={back} /></button>
+            { paused ? <button onClick={() => player.current.resume()}><img src={play} /></button> : <button onClick={() => player.current.pause()}><img src={pause} /></button> }
+            <button onClick={() => player.current.nextTrack()}><img src={skip} /></button>
           </div>
         </div>
 
       </div>
     )
   } else {
-    return <div />
+    return (
+      <div className="player">
+        <div className="player__progressBar"></div>
+        <div className="player__bottom">
+        <div className="player__controls">
+          <img src={back} />
+            <img src={play} />
+          <img src={skip} />
+        </div>
+        </div>
+      </div>
+    )
   }
   
 }
