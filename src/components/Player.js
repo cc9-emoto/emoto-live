@@ -8,7 +8,7 @@ import play from '../assets/images/play.svg'
 import pause from '../assets/images/pause.svg'
 import "../styles/Player.scss"
 
-const Player = ({ playerState, setPlayerState, player, playlist }) => {
+const Player = ({ playerState, setPlayerState, player, playlist, getNextSong }) => {
   
   const requestNewToken = async () => {
     const refreshToken = Cookies.get("emoto-refresh");
@@ -34,10 +34,11 @@ const Player = ({ playerState, setPlayerState, player, playlist }) => {
     }, 100);
   }
 
-  const playMusic = async (device_id) => {
+  const playMusic = async ({device_id, offset = 0}) => {
     const token = Cookies.get('emoto-access')
     await axios.put(`https://api.spotify.com/v1/me/player/play?device_id=${device_id}`, {
-      "context_uri": `spotify:playlist:${playlist}`
+      "context_uri": `spotify:playlist:${playlist}`, 
+      offset: {"position": offset }
     }, {headers: {Authorization: `Bearer ${token}` }});
   }
 
@@ -50,7 +51,14 @@ const Player = ({ playerState, setPlayerState, player, playlist }) => {
     });
     await player.current.connect();
     player.current.addListener('ready', ({ device_id }) => {
-      playMusic(device_id);
+      playMusic({device_id});
+    });
+    player.current.addListener('player_state_changed', async (state) => {
+      if (state.position > state.duration - 300 && state.paused) {
+        const offset = state.track_window.previous_tracks.length;
+        await getNextSong();
+        playMusic({ device_id: player.current._options.id, offset });
+      }
     });
     startStatePolling();
   }
@@ -61,7 +69,6 @@ const Player = ({ playerState, setPlayerState, player, playlist }) => {
     const windowX = window.screen.width;
     const duration = playerState.duration;
     const seekTo = Math.round(duration * clickX / windowX );
-    console.log(seekTo);
     player.current.seek(seekTo);
   }
 
