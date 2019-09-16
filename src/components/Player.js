@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import axios from 'axios';
 import Cookies from 'js-cookie'
+import Spotify from '../helpers/Spotify'
 import back from '../assets/images/back.svg'
 import skip from '../assets/images/skip.svg'
 import play from '../assets/images/play.svg'
@@ -55,13 +56,22 @@ const Player = ({ playerState, setPlayerState, player, playlist }) => {
   }
   useEffect(() => { if(playlist) init() }, [playlist])
 
+  const handleProgressBarClick = async (e) => {
+    const clickX = e.clientX;
+    const windowX = window.screen.width;
+    const duration = playerState.duration;
+    const seekTo = Math.round(duration * clickX / windowX );
+    console.log(seekTo);
+    player.current.seek(seekTo);
+  }
+
   if (playerState && playlist) {
     const { position, duration, paused } = playerState;
     const { album, artists, name } = playerState.track_window.current_track
     return (
       <div className="player">
 
-        <div className="player__progressBar">
+        <div className="player__progressBar" onClick={(e) => handleProgressBarClick(e)}>
           <div className="player__progressBarComplete" style={{width: `${position/duration*100}%`}}/>
         </div>
         

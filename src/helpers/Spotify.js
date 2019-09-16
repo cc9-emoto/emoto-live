@@ -10,7 +10,6 @@ const Spotify = {
       })
       return res.data;
     } catch (err) {
-      console.log("getAudioAnalysis again")
       return Spotify.getAudioAnalysis({ id, token });
     }
   },

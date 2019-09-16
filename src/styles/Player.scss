@@ -9,6 +9,9 @@
   width: 100%;
   background-color: black;
   position: relative;
+  &:hover {
+    cursor: pointer;
+  }
   .player__progressBarComplete {
     background-color: green;
     height: 10px;
