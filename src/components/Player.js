@@ -3,7 +3,7 @@ import axios from 'axios';
 import Cookies from 'js-cookie'
 import "../styles/Player.scss"
 
-const Player = ({ playerState, setPlayerState, player }) => {
+const Player = ({ playerState, setPlayerState, player, playlist }) => {
   
   const requestNewToken = async () => {
     const refreshToken = Cookies.get("emoto-refresh");
@@ -31,8 +31,8 @@ const Player = ({ playerState, setPlayerState, player }) => {
 
   const playMusic = async (device_id) => {
     const token = Cookies.get('emoto-access')
-    axios.put(`https://api.spotify.com/v1/me/player/play?device_id=${device_id}`, {
-      "context_uri": "spotify:playlist:4AsUaZhA0ibjTSvsLlJOoB"
+    await axios.put(`https://api.spotify.com/v1/me/player/play?device_id=${device_id}`, {
+      "context_uri": `spotify:playlist:${playlist}`
     }, {headers: {Authorization: `Bearer ${token}` }});
   }
 
@@ -49,9 +49,9 @@ const Player = ({ playerState, setPlayerState, player }) => {
     });
     startStatePolling();
   }
-  useEffect(() => { init() }, [])
+  useEffect(() => { if(playlist) init() }, [playlist])
 
-  if (playerState) {
+  if (playerState && playlist) {
     const { position, duration, paused } = playerState;
     const { album, artists, name } = playerState.track_window.current_track
     return (

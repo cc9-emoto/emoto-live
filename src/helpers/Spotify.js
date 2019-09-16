@@ -2,6 +2,7 @@ import axios from 'axios';
 
 const Spotify = {
   getAudioAnalysis: async ({ id, token }) => {
+    console.log("getAudioAnalysis")
     try {
       const res = await axios.get(`https://api.spotify.com/v1/audio-analysis/${id}`, { 
         headers: { 'Authorization': `Bearer ${token}` },
@@ -9,6 +10,7 @@ const Spotify = {
       })
       return res.data;
     } catch (err) {
+      console.log("getAudioAnalysis again")
       return Spotify.getAudioAnalysis({ id, token });
     }
   },
@@ -30,17 +32,23 @@ const Spotify = {
     }, {headers: {Authorization: `Bearer ${token}` }});
     return res.data;
   },
+  getPlaylistTracks: async ({ token, playlistId }) => {
+    const res = await axios.get(`https://api.spotify.com/v1/playlists/${playlistId}/tracks`, 
+    {headers: {Authorization: `Bearer ${token}` }});
+    return res.data;
+  },
   getTopTracks: async({ token }) => {
     const tracks = await axios.get(`https://api.spotify.com/v1/me/top/tracks?limit=50`, {headers: {Authorization: `Bearer ${token}` }});
     const trackIds = tracks.data.items.map(song => song.id).join(",");
     const trackDataResponse = await axios.get(`https://api.spotify.com/v1/audio-features/?ids=${trackIds}`, {headers: {Authorization: `Bearer ${token}` }});
     const trackData = trackDataResponse.data.audio_features;
     const topTrackData = tracks.data.items.map((song, index) => {
+      const { valence, mode, energy, id } = trackData[index];
       return {
         name: song.name,
         artist: song.artists[0].name,
         id: song.id,
-        emoValue: trackData[index]
+        emoValue: (valence + mode + energy) / 3
       }
     });
     return topTrackData;
