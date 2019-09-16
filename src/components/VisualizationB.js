@@ -7,7 +7,7 @@ const VisualizationB = ({ position, beatsData, color, playerPlaying }) => {
   const container = useRef();
   const counter = useRef(0);
   const [duration, setDuration] = useState(200);
-  const beats = new Set(beatsData.map((beat) => Math.ceil(beat.start*1000/100)*100));
+  const beats = beatsData ? new Set(beatsData.map((beat) => Math.ceil(beat.start*1000/100)*100)) : new Set();
 
   useEffect(() => {
     const container = document.querySelector('.visualization');
@@ -23,7 +23,7 @@ const VisualizationB = ({ position, beatsData, color, playerPlaying }) => {
   }, [position])
 
   useEffect(() => {
-    if (beatsData.length > 0 && playerPlaying) {
+    if (beatsData && beatsData.length > 0 && playerPlaying) {
       const avgDuration =
         beatsData.reduce((acc, beat) => acc + beat.duration, 0) /
         beatsData.length;

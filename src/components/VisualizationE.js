@@ -1,36 +1,33 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import anime from 'animejs';
 import "../styles/Visualization.scss";
 
-const VisualizationE = ({ beatsData = [], playerPlaying, color, emotionValue }) => {
-  let time = 0;
-  let counter = 0;
-  const beats = new Set(beatsData.map((beat) => Math.ceil(beat.start*1000/100)*100));
+const VisualizationE = ({ beatsData = [], color, playerPlaying, position, emotionValue }) => {
+  const counter = useRef(0);  
+  const [duration, setDuration] = useState(200);
+  const beats = new Set(beatsData.map(beat => Math.ceil((beat.start * 1000) / 100) * 100));
+
+  useEffect(() => {
+    if (beatsData.length > 0 && playerPlaying) {
+      const avgDuration =
+        beatsData.reduce((acc, beat) => acc + beat.duration, 0) /
+        beatsData.length;
+      setDuration(avgDuration * 1000);
+    }
+  }, [beatsData, playerPlaying]);
+
+  useEffect(() => {
+    if (beats.has(Math.round(position/100)*100)) animate();
+  }, [position])
 
   const animate = () => {
     anime({
       targets: '.rectangle',
       height: function(e, i, l) {
-        return (Math.sin(i + counter) + 1.5) * 25
+        return (Math.sin(i + counter.current) + 1.5) * 25
       }
     });
-    counter++;
-  }
-
-  useEffect(() => {
-    time = 0;
-    if (beatsData.length > 0 && time === 0 && playerPlaying) {
-      startTicker();
-    }
-  }, [beatsData]);
-
-  const startTicker = () => {
-    setInterval(() => {
-      time = time + 100
-      if (beats.has(time)) { 
-        animate();
-      }
-    }, 100);
+    counter.current = counter.current + 1;
   }
 
   const renderRectangles = () => {
