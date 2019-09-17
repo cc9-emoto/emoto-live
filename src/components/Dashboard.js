@@ -27,6 +27,7 @@ const Dashboard = () => {
   const [data, setData] = useState(null);
   const [color, setColor] = useState("FFFFFF");
   const player = useRef(null);
+  const [voiceLang, setVoiceLang] = useState("en-US");
 
   useEffect(() => {
     setColor(`${colorHelper.getHexFromEmotion(emotionValue)}`);
@@ -95,7 +96,11 @@ const Dashboard = () => {
         <VisualizationToggle vis={vis} setVis={setVis} />
         <div className="dashboard__emotionValue">{emotionValue.toFixed(2)}</div>
         <Camera setEmotionValue={setEmotionValue} />
-        <Speech player={player} />
+        <Speech
+          player={player}
+          voiceLang={voiceLang}
+          setVoiceLang={setVoiceLang}
+        />
 
         {vis === 1 ? (
           <VisualizationA
