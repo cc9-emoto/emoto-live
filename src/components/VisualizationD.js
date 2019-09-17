@@ -1,8 +1,7 @@
 import React, { useState, useEffect, useRef} from 'react';
 import "../styles/Visualization.scss"
-import colorHelper from '../helpers/colorHelper'
 
-const VisualizationB = ({ position, beatsData, color, playerPlaying }) => {
+const VisualizationD = ({ position, beatsData = [], color, playerPlaying }) => {
   const canvas = useRef();
   const ctx = useRef();
   const container = useRef();
@@ -69,4 +68,4 @@ const VisualizationB = ({ position, beatsData, color, playerPlaying }) => {
   )
 }
 
-export default VisualizationB;
+export default VisualizationD;

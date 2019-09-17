@@ -9,6 +9,9 @@
   width: 100%;
   background-color: black;
   position: relative;
+  &:hover {
+    cursor: pointer;
+  }
   .player__progressBarComplete {
     background-color: green;
     height: 10px;
@@ -19,8 +22,18 @@
   display: flex;
   flex-direction: row;
   align-items: center;
+  position: relative;
+  height: 75px;
+  justify-content: center;
+  button:hover {
+    cursor: pointer;
+  }
 }
 .player__detail {
+  position: absolute;
+  left: 0;
+  top: 0;
+  justify-self: flex-start;
   display: flex;
   flex-direction: row;
   img {

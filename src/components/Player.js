@@ -1,9 +1,14 @@
 import React, { useEffect } from 'react';
 import axios from 'axios';
 import Cookies from 'js-cookie'
+import Spotify from '../helpers/Spotify'
+import back from '../assets/images/back.svg'
+import skip from '../assets/images/skip.svg'
+import play from '../assets/images/play.svg'
+import pause from '../assets/images/pause.svg'
 import "../styles/Player.scss"
 
-const Player = ({ playerState, setPlayerState, player }) => {
+const Player = ({ playerState, setPlayerState, player, playlist, getNextSong }) => {
   
   const requestNewToken = async () => {
     const refreshToken = Cookies.get("emoto-refresh");
@@ -29,10 +34,11 @@ const Player = ({ playerState, setPlayerState, player }) => {
     }, 100);
   }
 
-  const playMusic = async (device_id) => {
+  const playMusic = async ({device_id, offset = 0}) => {
     const token = Cookies.get('emoto-access')
-    axios.put(`https://api.spotify.com/v1/me/player/play?device_id=${device_id}`, {
-      "context_uri": "spotify:playlist:4AsUaZhA0ibjTSvsLlJOoB"
+    await axios.put(`https://api.spotify.com/v1/me/player/play?device_id=${device_id}`, {
+      "context_uri": `spotify:playlist:${playlist}`, 
+      offset: {"position": offset }
     }, {headers: {Authorization: `Bearer ${token}` }});
   }
 
@@ -45,19 +51,34 @@ const Player = ({ playerState, setPlayerState, player }) => {
     });
     await player.current.connect();
     player.current.addListener('ready', ({ device_id }) => {
-      playMusic(device_id);
+      playMusic({device_id});
+    });
+    player.current.addListener('player_state_changed', async (state) => {
+      if (state.position > state.duration - 300 && state.paused) {
+        const offset = state.track_window.previous_tracks.length;
+        await getNextSong();
+        playMusic({ device_id: player.current._options.id, offset });
+      }
     });
     startStatePolling();
   }
-  useEffect(() => { init() }, [])
+  useEffect(() => { if(playlist) init() }, [playlist])
 
-  if (playerState) {
+  const handleProgressBarClick = async (e) => {
+    const clickX = e.clientX;
+    const windowX = window.screen.width;
+    const duration = playerState.duration;
+    const seekTo = Math.round(duration * clickX / windowX );
+    player.current.seek(seekTo);
+  }
+
+  if (playerState && playlist) {
     const { position, duration, paused } = playerState;
     const { album, artists, name } = playerState.track_window.current_track
     return (
       <div className="player">
 
-        <div className="player__progressBar">
+        <div className="player__progressBar" onClick={(e) => handleProgressBarClick(e)}>
           <div className="player__progressBarComplete" style={{width: `${position/duration*100}%`}}/>
         </div>
         
@@ -70,16 +91,27 @@ const Player = ({ playerState, setPlayerState, player }) => {
             </div>
           </div>
           <div className="player__controls">
-            <button onClick={() => player.current.previousTrack()}>PREVIOUS</button>
-            { paused ? <button onClick={() => player.current.resume()}>PLAY</button> : <button onClick={() => player.current.pause()}>PAUSE</button> }
-            <button onClick={() => player.current.nextTrack()}>NEXT</button>
+            <button onClick={() => player.current.previousTrack()}><img src={back} /></button>
+            { paused ? <button onClick={() => player.current.resume()}><img src={play} /></button> : <button onClick={() => player.current.pause()}><img src={pause} /></button> }
+            <button onClick={() => player.current.nextTrack()}><img src={skip} /></button>
           </div>
         </div>
 
       </div>
     )
   } else {
-    return <div />
+    return (
+      <div className="player">
+        <div className="player__progressBar"></div>
+        <div className="player__bottom">
+        <div className="player__controls">
+          <img src={back} />
+            <img src={play} />
+          <img src={skip} />
+        </div>
+        </div>
+      </div>
+    )
   }
   
 }
