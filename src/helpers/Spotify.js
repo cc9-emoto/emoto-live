@@ -2,6 +2,7 @@ import axios from "axios";
 
 const Spotify = {
   getAudioAnalysis: async ({ id, token }) => {
+    if (id === undefined) return;
     console.log("getAudioAnalysis");
     try {
       const res = await axios.get(

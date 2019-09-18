@@ -1,16 +1,14 @@
-import axios from 'axios';
+const playlistHelper = {
+  getNextSong: ({ emoValue, songs }) => {
+    const sortedSongs = songs.sort((songA, songB) => {
+      const diffA = Math.abs(songA.emoValue - emoValue);
+      const diffB = Math.abs(songB.emoValue - emoValue);
+      if (diffA > diffB) return 1;
+      return -1;
+    });
+    console.log(sortedSongs);
+    return sortedSongs[0];
+  }
+};
 
-const getNextSong = async ({ value, token, uid }) => {
-  const response = await axios.post("/graphql", {
-    query: `
-    query {
-      matchingSong (value: ${value}, token: "${token}", uid: "${uid}") {
-        songId
-      }
-    }
-  `
-  });
- return response.data.data.matchingSong.songId;
-}
-
-export default { getNextSong }
+export default playlistHelper;
