@@ -28,6 +28,7 @@ const Dashboard = () => {
   const [data, setData] = useState(null);
   const [color, setColor] = useState("FFFFFF");
   const player = useRef(null);
+  const [voiceLang, setVoiceLang] = useState("en-US");
 
   useEffect(() => {
     setColor(`${colorHelper.getHexFromEmotion(emotionValue)}`);
@@ -51,8 +52,8 @@ const Dashboard = () => {
     });
     const tracks = res.items.map(item => item.track.id);
     const newData = await Spotify.getAudioAnalysis({ id: tracks[0], token });
-    if (newData) setData(data ? [...data, newData]: [newData]);
-  }
+    if (newData) setData(data ? [...data, newData] : [newData]);
+  };
 
   const initPlaylist = async () => {
     const playlist = Cookies.get("emoto-playlist");
@@ -100,25 +101,55 @@ const Dashboard = () => {
         <VisualizationToggle vis={vis} setVis={setVis} />
         <div className="dashboard__emotionValue">{emotionValue.toFixed(2)}</div>
         <Camera setEmotionValue={setEmotionValue} />
-        {/* <button onClick={getNextSong} style={{ zIndex: 10 }}>
-          CLICK ME
-        </button> */}
-        <Speech player={player} />
+        <Speech
+          player={player}
+          voiceLang={voiceLang}
+          setVoiceLang={setVoiceLang}
+        />
 
-        { vis === 1 ?
-          <VisualizationA position={playerState ? playerState.position: 0} color={color} beatsData={data ? data[0].beats : []} playerPlaying={true} />
-        : vis === 2 ?
-          <VisualizationB position={playerState ? playerState.position: 0} color={color} beatsData={data ? data[0].beats : []} playerPlaying={true} />
-        : vis === 3 ?
-          <VisualizationC position={playerState ? playerState.position: 0} color={color} beatsData={data ? data[0].beats : []} playerPlaying={true} />
-        : vis === 4 ?
-          <VisualizationD position={playerState ? playerState.position: 0} color={color} beatsData={data ? data[0].beats : []} playerPlaying={true} />
-        : vis === 5 ?
-          <VisualizationE position={playerState ? playerState.position: 0} color={color} beatsData={data ? data[0].beats : []} playerPlaying={true} />
-        : 
-          <VisualizationF position={playerState ? playerState.position: 0} color={color} beatsData={data ? data[0].beats : []} playerPlaying={true} />
-        }
-      
+        {vis === 1 ? (
+          <VisualizationA
+            position={playerState ? playerState.position : 0}
+            color={color}
+            beatsData={data ? data[0].beats : []}
+            playerPlaying={true}
+          />
+        ) : vis === 2 ? (
+          <VisualizationB
+            position={playerState ? playerState.position : 0}
+            color={color}
+            beatsData={data ? data[0].beats : []}
+            playerPlaying={true}
+          />
+        ) : vis === 3 ? (
+          <VisualizationC
+            position={playerState ? playerState.position : 0}
+            color={color}
+            beatsData={data ? data[0].beats : []}
+            playerPlaying={true}
+          />
+        ) : vis === 4 ? (
+          <VisualizationD
+            position={playerState ? playerState.position : 0}
+            color={color}
+            beatsData={data ? data[0].beats : []}
+            playerPlaying={true}
+          />
+        ) : vis === 5 ? (
+          <VisualizationE
+            position={playerState ? playerState.position : 0}
+            color={color}
+            beatsData={data ? data[0].beats : []}
+            playerPlaying={true}
+          />
+        ) : (
+          <VisualizationF
+            position={playerState ? playerState.position : 0}
+            color={color}
+            beatsData={data ? data[0].beats : []}
+            playerPlaying={true}
+          />
+        )}
       </div>
       <Playlist
         upcoming={playerState ? playerState.track_window.next_tracks : []}
