@@ -1,5 +1,6 @@
 import React from "react";
-import axiosConfig from "../helpers/axiosConfig.js";
+// import axiosConfig from "../helpers/axiosConfig.js";
+import axios from 'axios';
 import "../styles/Login.scss";
 import "bootstrap/dist/css/bootstrap.css";
 import "animate.css";
@@ -16,8 +17,14 @@ AOS.init();
 
 const Login = () => {
   const handleLogin = async () => {
-    const response = await axiosConfig.get("/spotify/authorize");
+    // const response = await axiosConfig.get("/spotify/authorize");
+    const response = await axios.get("https://hur7tfyff1.execute-api.us-east-2.amazonaws.com/Prod/spotify/authorization", 
+      {headers: {
+      "Content-Type": "application/json"
+     }}
+    )
     window.open(response.data);
+    console.log(response);
   };
 
   return (
@@ -44,11 +51,17 @@ const Login = () => {
               data-aos="fade-down"
               className="col-lg-6 col-md-8 col-sm-8 col-xs-8"
             ></div>
+<<<<<<< HEAD
             <div className="home__description animated fadeInDown delay-1s col-lg-6 col-md-4 col-sm-4 col-xs-4">
               <h1 className="home__description--big">
                 Music for every emotion.
               </h1>
               <p className="home__description--small">
+=======
+            <div className="description animated fadeInDown delay-1s col-lg-6 col-md-4 col-sm-4 col-xs-4">
+              <h1 className="description__emoto">Music for every emotion.</h1>
+              <p className="description__detail">
+>>>>>>> 553ef91bb95f4c17f0574538e3e5fcce19c59ae3
                 Infinite music recommendations,
                 <br />
                 powered by facial recognition
@@ -69,12 +82,21 @@ const Login = () => {
       <section className="visual">
         <div className="container">
           <div data-aos="fade-right" className="row">
+<<<<<<< HEAD
             <div className="col-lg-6 col-md-6 col-sm-6 col-xs-6">
               <p>
                 Equalizer that responds to <br />
                 your music and your mood.
               </p>
               <h1>
+=======
+            <div className="description col-lg-6 col-md-6 col-sm-6 col-xs-6">
+              <p className="description__detail">
+                Equalizer that responds to <br />
+                your music and your mood.
+              </p>
+              <h1 className="description__emoto">
+>>>>>>> 553ef91bb95f4c17f0574538e3e5fcce19c59ae3
                 Visualize <br />
                 your music.
               </h1>
@@ -92,11 +114,19 @@ const Login = () => {
               data-aos="fade-left"
               className="description col-lg-7 col-md-6 col-sm-6 col-xs-6"
             >
+<<<<<<< HEAD
               <p>
                 Always-on voice recognition <br />
                 listening to your every command.
               </p>
               <h1>
+=======
+              <p className="description__detail">
+                Always-on voice recognition <br />
+                listening to your every command.
+              </p>
+              <h1 className="description__emoto">
+>>>>>>> 553ef91bb95f4c17f0574538e3e5fcce19c59ae3
                 Control music <br />
                 with your voice.
               </h1>
@@ -112,12 +142,20 @@ const Login = () => {
               data-aos="fade-right"
               className="description col-lg-7 col-md-6 col-sm-6 col-xs-6"
             >
+<<<<<<< HEAD
               <p>
+=======
+              <p className="description__detail">
+>>>>>>> 553ef91bb95f4c17f0574538e3e5fcce19c59ae3
                 Cutting-edge computer vision algorithm
                 <br />
                 detects changes in your emotional state.
               </p>
+<<<<<<< HEAD
               <h1>
+=======
+              <h1 className="description__emoto">
+>>>>>>> 553ef91bb95f4c17f0574538e3e5fcce19c59ae3
                 Powered by <br />
                 AI Facial Analysis
               </h1>
