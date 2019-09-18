@@ -21,7 +21,8 @@ const Speech = ({ player, voiceLang, setVoiceLang }) => {
       if (
         text.toLowerCase().includes("stop") ||
         text.includes("ポーズ") ||
-        text.includes("止まれ")
+        text.includes("止まれ") ||
+        text.includes("ストップ")
       ) {
         console.log("STOP");
         player.current.pause();
