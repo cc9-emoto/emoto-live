@@ -17,12 +17,15 @@ const Player = ({
 }) => {
   const requestNewToken = async () => {
     const refreshToken = Cookies.get("emoto-refresh");
-    const response = await axios.post("https://xvdbttjww0.execute-api.us-east-2.amazonaws.com/done/reauthorize", { refreshToken }, 
-      {headers: { "Content-type": "application/json"}});
+    const response = await axios.post(
+      "https://xvdbttjww0.execute-api.us-east-2.amazonaws.com/done/reauthorize",
+      { refreshToken },
+      { headers: { "Content-type": "application/json" } }
+    );
     const accessToken = response.data.body.access_token;
     Cookies.set("emoto-access", accessToken);
     return accessToken;
-  }
+  };
 
   const waitForSpotify = () => {
     return new Promise(resolve => {
@@ -85,10 +88,7 @@ const Player = ({
     const clickX = e.clientX;
     const windowX = window.innerWidth;
     const duration = playerState.duration;
-<<<<<<< HEAD
-=======
     console.log(clickX, windowX);
->>>>>>> master
     const seekTo = Math.round((duration * clickX) / windowX);
     player.current.seek(seekTo);
   };
