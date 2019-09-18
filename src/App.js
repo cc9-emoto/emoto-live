@@ -9,6 +9,7 @@ import Dashboard from "./components/Dashboard";
 import Callback from './components/Callback'
 
 const App = () => {
+<<<<<<< HEAD
   return (
     <Router>
       <Route path="/" exact component={Login} />
@@ -21,6 +22,13 @@ const App = () => {
   // } else {
   // return <Login />;
   // }
+=======
+  if (Cookies.get('emoto-access')) {
+    return <Dashboard />
+  } else {
+  return <Login />;
+  }
+>>>>>>> master
 };
 
 export default App;
