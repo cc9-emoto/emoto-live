@@ -86,7 +86,7 @@ const Dashboard = () => {
     const count = await db.songs.count();
     if (count > 0) {
       const data = await db.songs.toArray();
-      setSongs(data);
+      setSongs(data);~
     } else {
       const token = Cookies.get("emoto-access");
       const data = await Spotify.getTopTracks({ token });
