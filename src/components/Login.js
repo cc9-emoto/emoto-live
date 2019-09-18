@@ -9,8 +9,8 @@ import wilson from "../assets/images/wilson.jpg";
 import matt from "../assets/images/matt.jpg";
 import go from "../assets/images/go.jpg";
 import rina from "../assets/images/rina.jpg";
-import spotifyLogo from '../assets/images/spotifyLogo.png'
-import emotologo from "../assets/images/emotologo.svg"
+import spotifyLogo from "../assets/images/spotifyLogo.png";
+import emotologo from "../assets/images/emotologo.svg";
 
 AOS.init();
 
@@ -24,7 +24,7 @@ const Login = () => {
     <div className="login">
       <nav className="navbar">
         <div className="navbar__emoto">
-          <img src={emotologo} alt="emoto"/>
+          <img src={emotologo} alt="emoto" />
           <h1 className="navbar__appname">Emoto</h1>
         </div>
         <button
@@ -33,7 +33,7 @@ const Login = () => {
           onClick={handleLogin}
         >
           <img src={spotifyLogo} />
-                Login
+          Login
         </button>
       </nav>
 
@@ -44,14 +44,18 @@ const Login = () => {
               data-aos="fade-down"
               className="col-lg-6 col-md-8 col-sm-8 col-xs-8"
             ></div>
-            <div className="description animated fadeInDown delay-1s col-lg-6 col-md-4 col-sm-4 col-xs-4">
-              <h1 className="description__emoto">Music for every emotion.</h1>
-              <p className="description__detail">
-                Infinite music recommendations,<br/>powered by facial recognition
+            <div className="home__description animated fadeInDown delay-1s col-lg-6 col-md-4 col-sm-4 col-xs-4">
+              <h1 className="home__description--big">
+                Music for every emotion.
+              </h1>
+              <p className="home__description--small">
+                Infinite music recommendations,
+                <br />
+                powered by facial recognition
               </p>
               <button
                 type="button"
-                className="description__btn btn btn-lg"
+                className="home__login--btn btn btn-lg"
                 onClick={handleLogin}
               >
                 <img src={spotifyLogo} />
@@ -65,11 +69,15 @@ const Login = () => {
       <section className="visual">
         <div className="container">
           <div data-aos="fade-right" className="row">
-            <div className="description col-lg-6 col-md-6 col-sm-6 col-xs-6">
-              <p className="description__detail">
-                Equalizer that responds to <br/>your music and your mood. 
+            <div className="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+              <p>
+                Equalizer that responds to <br />
+                your music and your mood.
               </p>
-              <h1 className="description__emoto">Visualize <br />your music.</h1>
+              <h1>
+                Visualize <br />
+                your music.
+              </h1>
             </div>
             <div className="col-lg-6 col-md-6 col-sm-6 col-xs-6"></div>
           </div>
@@ -84,14 +92,15 @@ const Login = () => {
               data-aos="fade-left"
               className="description col-lg-7 col-md-6 col-sm-6 col-xs-6"
             >
-              <p className="description__detail">
-                Always-on voice recognition <br/>listening to your every command.
+              <p>
+                Always-on voice recognition <br />
+                listening to your every command.
               </p>
-              <h1 className="description__emoto">
-                Control music <br/>with your voice.
+              <h1>
+                Control music <br />
+                with your voice.
               </h1>
             </div>
-            
           </div>
         </div>
       </section>
@@ -103,15 +112,17 @@ const Login = () => {
               data-aos="fade-right"
               className="description col-lg-7 col-md-6 col-sm-6 col-xs-6"
             >
-              <p className="description__detail">
-                Cutting-edge computer vision algorithm<br/>detects changes in your emotional state. 
+              <p>
+                Cutting-edge computer vision algorithm
+                <br />
+                detects changes in your emotional state.
               </p>
-              <h1 className="description__emoto">
-                Powered by <br/>AI Facial Analysis
+              <h1>
+                Powered by <br />
+                AI Facial Analysis
               </h1>
             </div>
             <div className="col-lg-5 col-md-6 col-sm-6 col-xs-6"></div>
-            
           </div>
         </div>
       </section>
@@ -133,7 +144,7 @@ const Login = () => {
             >
               <img className="team__head" src={wilson} alt="wilson"></img>
               <button
-                className="github__btn"
+                className="team__btn"
                 onClick={() => {
                   window.open(
                     "https://www.linkedin.com/in/wilsonplau",
@@ -151,7 +162,7 @@ const Login = () => {
             >
               <img className="team__head" src={matt} alt="matt"></img>
               <button
-                className="github__btn"
+                className="team__btn"
                 onClick={() => {
                   window.open("https://www.linkedin.com/in/mc255v", "_blank");
                 }}
@@ -166,7 +177,7 @@ const Login = () => {
             >
               <img className="team__head" src={go} alt="go"></img>
               <button
-                className="github__btn"
+                className="team__btn"
                 onClick={() => {
                   window.open(
                     "https://www.linkedin.com/in/go-nakano/",
@@ -184,7 +195,7 @@ const Login = () => {
             >
               <img className="team__head" src={rina} alt="rina"></img>
               <button
-                className="github__btn"
+                className="team__btn"
                 onClick={() => {
                   window.open(
                     "https://www.linkedin.com/in/rinasakamaki/",
