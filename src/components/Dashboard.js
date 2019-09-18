@@ -51,13 +51,8 @@ const Dashboard = () => {
     });
     const tracks = res.items.map(item => item.track.id);
     const newData = await Spotify.getAudioAnalysis({ id: tracks[0], token });
-<<<<<<< HEAD
     if (newData) setData(data ? [...data, newData]: [newData]);
   }
-=======
-    setData(data ? [...data, newData] : [newData]);
-  };
->>>>>>> master
 
   const initPlaylist = async () => {
     const playlist = Cookies.get("emoto-playlist");
@@ -110,7 +105,6 @@ const Dashboard = () => {
         </button>
         <Speech player={player} />
 
-<<<<<<< HEAD
         { vis === 1 ?
           <VisualizationA position={playerState ? playerState.position: 0} color={color} beatsData={data ? data[0].beats : []} playerPlaying={true} />
         : vis === 2 ?
@@ -125,51 +119,6 @@ const Dashboard = () => {
           <VisualizationF position={playerState ? playerState.position: 0} color={color} beatsData={data ? data[0].beats : []} playerPlaying={true} />
         }
       
-=======
-        {vis === 1 ? (
-          <VisualizationA
-            position={playerState ? playerState.position : 0}
-            color={color}
-            beatsData={data && data[0].beats}
-            playerPlaying={true}
-          />
-        ) : vis === 2 ? (
-          <VisualizationB
-            position={playerState ? playerState.position : 0}
-            color={color}
-            beatsData={data && data[0].beats}
-            playerPlaying={true}
-          />
-        ) : vis === 3 ? (
-          <VisualizationC
-            position={playerState ? playerState.position : 0}
-            color={color}
-            beatsData={data && data[0].beats}
-            playerPlaying={true}
-          />
-        ) : vis === 4 ? (
-          <VisualizationD
-            position={playerState ? playerState.position : 0}
-            color={color}
-            beatsData={data && data[0].beats}
-            playerPlaying={true}
-          />
-        ) : vis === 5 ? (
-          <VisualizationE
-            position={playerState ? playerState.position : 0}
-            color={color}
-            beatsData={data && data[0].beats}
-            playerPlaying={true}
-          />
-        ) : (
-          <VisualizationF
-            position={playerState ? playerState.position : 0}
-            color={color}
-            beatsData={data && data[0].beats}
-            playerPlaying={true}
-          />
-        )}
->>>>>>> master
       </div>
       <Playlist
         upcoming={playerState ? playerState.track_window.next_tracks : []}
