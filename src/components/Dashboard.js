@@ -67,8 +67,6 @@ const Dashboard = () => {
     }
   };
 
-  // playlistHelper.getNextSong();
-
   const getNextSong = async () => {
     const songs = await db.songs.filter(song => !song.played).toArray();
     const newSong = playlistHelper.getNextSong({ emoValue: 0.8, songs });
@@ -86,7 +84,7 @@ const Dashboard = () => {
     const count = await db.songs.count();
     if (count > 0) {
       const data = await db.songs.toArray();
-      setSongs(data);~
+      setSongs(data);
     } else {
       const token = Cookies.get("emoto-access");
       const data = await Spotify.getTopTracks({ token });
