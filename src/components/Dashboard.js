@@ -99,10 +99,10 @@ const Dashboard = () => {
       <div className="dashboard__main">
         <VisualizationToggle vis={vis} setVis={setVis} />
         <div className="dashboard__emotionValue">{emotionValue.toFixed(2)}</div>
-        {/* <Camera setEmotionValue={setEmotionValue} /> */}
-        <button onClick={getNextSong} style={{ zIndex: 10 }}>
+        <Camera setEmotionValue={setEmotionValue} />
+        {/* <button onClick={getNextSong} style={{ zIndex: 10 }}>
           CLICK ME
-        </button>
+        </button> */}
         <Speech player={player} />
 
         { vis === 1 ?
