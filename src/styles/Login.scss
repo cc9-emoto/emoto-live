@@ -4,24 +4,35 @@
   max-width: 100%;
 
   .navbar {
-    height: 10vh;
+    height: 75px;
     background-color: black;
 
-    .navebar__appname {
-      color: white;
-      margin-left: 30px;
-      font-size: 35px;
-      margin-top: 8px;
+    .navbar__emoto {
+      display: flex;
+      flex-direction: row;
+
+      .navbar__appname {
+        color: white;
+        letter-spacing: 0.6em;
+        text-transform: uppercase;
+        font-family: "Barlow";
+        margin-left: 30px;
+        font-size: 24px;
+        margin-top: 8px;
+      }
     }
 
     .navbar__btn {
-      background-color: #D59F27;
+      background-color: #333;
       color: white;
-      border-radius: 3px;
-      height: 40px;
-      width: 140px;
-      font-size: 17px;
-      margin-right: 40px;
+      border-radius: 40px;
+      font-size: 20px;
+      font-weight: 500;
+      padding: 4px 12px 4px 8px;
+      img {
+        max-height: 24px;
+        margin-right: 5px;
+      }
     }
   }
 
@@ -31,92 +42,88 @@
     background-repeat: no-repeat;
     background-size: cover;
     color: white;
-  }
+    align-items: center;
+    font-family: "Barlow";
 
-  .home {
-    background-image: url("../assets/images/music.jpeg");
-    background-attachment: fixed;
-
-    .description {
-      margin-top: 20px;
-
-      .description__emoto {
-        color: black;
-        font-size: 100px;
-      }
-
-      .description__detail {
-        font-size: 35px;
-        margin-bottom: 2rem;
-      }
-
-      .description__btn {
-        background-color: black;
-        color: white;
-        border-radius: 3px;
-        height: 60px;
-        width: 140px;
-      }
+    h1 {
+      color: white;
+      font-size: 84px;
+      line-height: 0.8em;
+    }
+    p {
+      font-size: 35px;
+      font-weight: 300;
+      line-height: 1.1em;
+      margin-bottom: 0.5em;
     }
   }
 
-  .speaker {
-    background-image: url("../assets/images/speaker.jpeg");
+  .home {
+    background-image: url("../assets/images/1.png");
+    background-attachment: fixed;
 
     .description {
-      margin-top: 50px;
-
+      margin-top: -75px;
       .description__emoto {
-        font-size: 100px;
+        text-shadow: 0 0 5px black;
       }
 
       .description__detail {
-        font-size: 28px;
+        margin-top: 1.5rem;
         margin-bottom: 2rem;
+        text-shadow: 0 0 3px black;
+      }
+
+      .description__btn {
+        background-color: white;
+        color: black;
+        border-radius: 40px;
+        font-size: 25px;
+        font-weight: 500;
+        padding: 4px 16px 4px 8px;
+        img {
+          max-height: 40px;
+          margin-right: 10px;
+        }
       }
     }
   }
 
   .visual {
-    background-image: url("../assets/images/visual.jpeg");
+    background-image: url("../assets/images/2.png");
     background-position: center;
+    display: flex;
+    align-items: flex-end;
+    padding-bottom: 100px;
+  }
 
+  .speaker {
+    background-image: url("../assets/images/3.png");
+    display: flex;
+    align-items: flex-end;
+    padding-bottom: 100px;
     .description {
-      margin-top: 50px;
+      text-align: right;
+    }
+  }
 
-      .description__emoto {
-        font-size: 100px;
-      }
-
-      .description__detail {
-        font-size: 28px;
-        margin-bottom: 2rem;
-      }
+  .ai {
+    background-image: url("../assets/images/4.png");
+    display: flex;
+    align-items: flex-end;
+    padding-bottom: 100px;
+    .description {
+      text-align: left;
     }
   }
 
   .team {
-    background-image: url("../assets/images/team.jpeg");
     background-position: center;
+    background-color: #222;
     color: white;
 
-    .description {
-      margin-top: 50px;
-
-      .description__emoto {
-        font-size: 100px;
-        margin-bottom: 50px;
-      }
-
-      .description__btn {
-        background-color: black;
-        color: white;
-        font-size: 20px;
-        border-radius: 3px;
-        height: 60px;
-        width: 140px;
-      }
-
+    .description__emoto {
+      margin-bottom: 50px;
     }
 
     .description__person {
@@ -133,58 +140,33 @@
       }
 
       .github__btn {
+        outline: none;
         margin-top: 40px;
-        background-color: #0077b5;
-        color: white;
+        background-color: #ddd;
+        color: #000;
         font-size: 24px;
         border-radius: 6px;
         border: none;
         height: 50px;
         width: 180px;
       }
-
       .github__btn:hover {
         background-color: white;
-        color: #0077b5;
-      }
-    }
-  }
-
-  .github {
-    background-image: url("../assets/images/github.jpeg");
-    background-position: center;
-    color: black;
-
-    .description {
-      margin-top: 50px;
-
-      .description__emoto {
-        font-size: 100px;
-      }
-
-      .description__detail {
-        font-size: 28px;
-        margin-bottom: 2rem;
-      }
-
-      .description__btn {
-        background-color: black;
-        color: white;
-        font-size: 20px;
-        border-radius: 3px;
-        height: 60px;
-        width: 140px;
+        color: #000;
       }
     }
   }
 
   .bottom {
-    background-color: rgb(33, 32, 37);
+    background-color: #000;
     color: white;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 15vh;
+    height: 10vh;
     font-size: 20px;
+    p {
+      margin-bottom: 0;
+    }
   }
 }
