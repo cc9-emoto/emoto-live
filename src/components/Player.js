@@ -11,11 +11,16 @@ import "../styles/Player.scss"
 const Player = ({ playerState, setPlayerState, player, playlist, getNextSong }) => {
   
   const requestNewToken = async () => {
+    console.log("requestNewToken")
     const refreshToken = Cookies.get("emoto-refresh");
-    const response = await axios.post("https://hur7tfyff1.execute-api.us-east-2.amazonaws.com/Prod/spotify/reauthorization", { refreshToken });
+    const response = await axios.post("https://hur7tfyff1.execute-api.us-east-2.amazonaws.com/Prod/spotify/reauthorization", { refreshToken },
+    {headers: {
+      "Content-Type": "application/json"
+     }}
+    );
     Cookies.set("emoto-access", response.data);
     return response.data;
-  };
+  };  
 
   const waitForSpotify = () => {
     return new Promise(resolve => {
