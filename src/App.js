@@ -5,7 +5,7 @@ import "./styles/Reset.scss";
 import "./styles/App.scss";
 import Login from "./components/Login";
 import Dashboard from "./components/Dashboard";
-import Callback from './components/Callback'
+import Callback from "./components/Callback";
 
 const App = () => {
   return (
@@ -14,7 +14,16 @@ const App = () => {
       <Route path="/dashboard" component={Dashboard} />
       <Route path="/callback" component={Callback} />
     </Router>
+<<<<<<< HEAD
   )
+=======
+  );
+  // if (Cookies.get('emoto-access')) {
+  //   return <Dashboard />
+  // } else {
+  // return <Login />;
+  // }
+>>>>>>> master
 };
 
 export default App;
