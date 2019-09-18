@@ -12,7 +12,7 @@ const Player = ({ playerState, setPlayerState, player, playlist, getNextSong }) 
   
   const requestNewToken = async () => {
     const refreshToken = Cookies.get("emoto-refresh");
-    const response = await axios.post("http://localhost:4000/spotify/reauthorize", { refreshToken });
+    const response = await axios.post("https://hur7tfyff1.execute-api.us-east-2.amazonaws.com/Prod/spotify/reauthorization", { refreshToken });
     Cookies.set("emoto-access", response.data);
     return response.data;
   };
