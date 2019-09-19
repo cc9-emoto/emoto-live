@@ -16,6 +16,7 @@ import VisualizationE from "../components/VisualizationE";
 import VisualizationF from "../components/VisualizationF";
 import playlistHelper from "../helpers/playlistHelper";
 
+import initData from '../data.json'
 import Spotify from "../helpers/Spotify";
 import Camera from "../components/Camera";
 
@@ -25,7 +26,7 @@ const Dashboard = () => {
   const [vis, setVis] = useState(1);
   const [songs, setSongs] = useState();
   const [playlist, setPlaylist] = useState(null);
-  const [data, setData] = useState(null);
+  const [data, setData] = useState(initData);
   const [color, setColor] = useState("FFFFFF");
   const player = useRef(null);
   const [voiceLang, setVoiceLang] = useState("en-US");
@@ -52,7 +53,7 @@ const Dashboard = () => {
     });
     const tracks = res.items.map(item => item.track.id);
     const newData = await Spotify.getAudioAnalysis({ id: tracks[0], token });
-    if (newData) setData(data ? [...data, newData] : [newData]);
+    if (newData) setData(newData);
   };
 
   const initPlaylist = async () => {
@@ -111,42 +112,42 @@ const Dashboard = () => {
           <VisualizationA
             position={playerState ? playerState.position : 0}
             color={color}
-            beatsData={data ? data[0].beats : []}
+            beatsData={data ? data.beats : []}
             playerPlaying={true}
           />
         ) : vis === 2 ? (
           <VisualizationB
             position={playerState ? playerState.position : 0}
             color={color}
-            beatsData={data ? data[0].beats : []}
+            beatsData={data ? data.beats : []}
             playerPlaying={true}
           />
         ) : vis === 3 ? (
           <VisualizationC
             position={playerState ? playerState.position : 0}
             color={color}
-            beatsData={data ? data[0].beats : []}
+            beatsData={data ? data.beats : []}
             playerPlaying={true}
           />
         ) : vis === 4 ? (
           <VisualizationD
             position={playerState ? playerState.position : 0}
             color={color}
-            beatsData={data ? data[0].beats : []}
+            beatsData={data ? data.beats : []}
             playerPlaying={true}
           />
         ) : vis === 5 ? (
           <VisualizationE
             position={playerState ? playerState.position : 0}
             color={color}
-            beatsData={data ? data[0].beats : []}
+            beatsData={data ? data.beats : []}
             playerPlaying={true}
           />
         ) : (
           <VisualizationF
             position={playerState ? playerState.position : 0}
             color={color}
-            beatsData={data ? data[0].beats : []}
+            beatsData={data ? data.beats : []}
             playerPlaying={true}
           />
         )}
