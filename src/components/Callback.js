@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Cookies from "js-cookie";
 import axios from 'axios';
 import { Redirect } from 'react-router-dom'
+import "../styles/Callback.scss";
 
 const Callback = ({ location }) => {
 	const [loaded, setLoaded] = useState(false);
@@ -26,7 +27,16 @@ const Callback = ({ location }) => {
 	}
 
 	if (loaded) return <Redirect to="/dashboard" />
-	else return <div>Loading...</div>
+	else {
+		return (
+			<div class="container">
+				<div class="ring">
+					Loading
+					<span class="spin"></span>
+				</div>
+			</div>
+		);
+	}
 
 }
 export default Callback;
