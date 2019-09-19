@@ -54,9 +54,11 @@ const Login = () => {
               data-aos="fade-down"
               className="col-lg-6 col-md-8 col-sm-8 col-xs-8"
             ></div>
-            <div className="description animated fadeInDown delay-1s col-lg-6 col-md-4 col-sm-4 col-xs-4">
-              <h1 className="description__emoto">Music for every emotion.</h1>
-              <p className="description__detail">
+            <div className="home__description animated fadeInDown delay-1s col-lg-6 col-md-4 col-sm-4 col-xs-4">
+              <h1 className="home__description--big">
+                Music for every emotion.
+              </h1>
+              <p className="home__description--small">
                 Infinite music recommendations,
                 <br />
                 powered by facial recognition
