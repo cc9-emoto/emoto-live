@@ -27,7 +27,7 @@ const VisualizationC = ({ position, beatsData = [], playerPlaying, color }) => {
         { value: 0.95, easing: "easeInOutQuad", duration: Math.round(duration / 2) },
         { value: 1, easing: "easeInOutQuad", duration: Math.round(duration / 2) }
       ],
-      delay: anime.stagger(2, { grid: [25, 30], from: "center" })
+      delay: anime.stagger(5, { grid: [25, 30], from: "center"})
     });
   };
 

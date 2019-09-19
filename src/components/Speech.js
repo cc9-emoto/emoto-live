@@ -27,7 +27,7 @@ const Speech = ({ player, voiceLang, setVoiceLang }) => {
         console.log("STOP");
         player.current.pause();
       }
-      if (text.toLowerCase().includes("play") || text.includes("スタート")) {
+      if (text.toLowerCase().includes("play") || text.toLowerCase().includes("start") || text.includes("スタート")) {
         console.log("PLAY");
         player.current.resume();
       }
