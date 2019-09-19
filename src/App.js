@@ -14,16 +14,7 @@ const App = () => {
       <Route path="/dashboard" component={Dashboard} />
       <Route path="/callback" component={Callback} />
     </Router>
-<<<<<<< HEAD
   )
-=======
-  );
-  // if (Cookies.get('emoto-access')) {
-  //   return <Dashboard />
-  // } else {
-  // return <Login />;
-  // }
->>>>>>> master
 };
 
 export default App;
