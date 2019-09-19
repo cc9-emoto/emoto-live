@@ -30,6 +30,7 @@ const Dashboard = () => {
   const [color, setColor] = useState("FFFFFF");
   const player = useRef(null);
   const [voiceLang, setVoiceLang] = useState("en-US");
+  const [offset, setOffset] = useState(0);
 
   useEffect(() => {
     setColor(`${colorHelper.getHexFromEmotion(emotionValue)}`);
@@ -164,6 +165,8 @@ const Dashboard = () => {
         player={player}
         playlist={playlist}
         getSongData={getSongData}
+        offset={offset}
+        setOffset={setOffset}
       />
     </div>
   );
