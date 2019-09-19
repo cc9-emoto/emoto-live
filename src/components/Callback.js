@@ -29,10 +29,10 @@ const Callback = ({ location }) => {
 	if (loaded) return <Redirect to="/dashboard" />
 	else {
 		return (
-			<div class="container">
-				<div class="ring">
+			<div className="container">
+				<div className="ring">
 					Loading
-					<span class="spin"></span>
+					<span className="spin"></span>
 				</div>
 			</div>
 		);
