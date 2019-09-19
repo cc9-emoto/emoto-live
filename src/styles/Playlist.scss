@@ -1,7 +1,13 @@
 .playlist {
+  height: calc(100vh - 85px);
+  overflow: scroll;
   background-color: #222;
+  padding-top: 25px;
   .playlist__top {
     h1 {
+      width: 100%;
+      position: absolute;
+      top: 0;
       letter-spacing: 0.1em;
       background-color: black;
       color: white;
@@ -18,13 +24,13 @@
   grid-template-columns: 50px 1fr;
   align-items: center;
   h2 {
-    font-size: 20px;
+    font-size: 18px;
     font-weight: 600;
     margin-bottom: 5px;
   }
   h3 {
-    font-size: 20px;
-    font-weight: 600;
+    font-size: 16px;
+    font-weight: 500;
     margin-bottom: 5px;
   }
 }
