@@ -31,7 +31,7 @@
       padding: 4px 12px 4px 8px;
 
       img {
-        max-height: 24px;
+        max-height: 20px;
         margin-right: 5px;
       }
     }
@@ -83,8 +83,9 @@
         font-weight: 500;
         padding: 4px 16px 4px 8px;
 
-        img {
+        .spotify__logo {
           max-height: 40px;
+          max-width: 20px;
           margin-right: 10px;
         }
       }

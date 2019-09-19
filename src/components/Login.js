@@ -66,7 +66,7 @@ const Login = () => {
                 className="home__login--btn btn btn-lg"
                 onClick={handleLogin}
               >
-                <img src={spotifyLogo} />
+                <img className="spotify__logo" src={spotifyLogo} />
                 Login with Spotify
               </button>
             </div>
