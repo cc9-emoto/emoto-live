@@ -52,6 +52,7 @@ const Dashboard = () => {
       token,
       playlistId: playlist
     });
+    if (res.items.length === 0) getNextSong()
     const tracks = res.items.map(item => item.track.id);
     const newData = await Spotify.getAudioAnalysis({ id: tracks[0], token });
     if (newData) setData(newData);
@@ -72,10 +73,17 @@ const Dashboard = () => {
 
   const getNextSong = async () => {
     const songs = await db.songs.filter(song => !song.played).toArray();
-    const newSong = playlistHelper.getNextSong({ emoValue: 0.8, songs });
+    const token = Cookies.get("emoto-access");
+    if (songs.length === 0) {
+      const id = await db.songs.limit(1);
+      const recommended = Spotify.getRecommended(token, id);
+      const dataWithPlayed = recommended.map(song => ({ ...song, played: false }));
+      const res = await db.songs.bulkAdd(dataWithPlayed);
+      setSongs({...songs, recommended});
+    }
+    const newSong = playlistHelper.getNextSong({ emotionValue, songs });
     console.log("GET NEXT SONG");
     db.songs.update(newSong.id, { played: true });
-    const token = Cookies.get("emoto-access");
     const data = await Spotify.addToPlaylist({
       songId: newSong.id,
       playlistId: playlist,

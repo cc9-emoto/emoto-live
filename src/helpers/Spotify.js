@@ -1,5 +1,24 @@
 import axios from "axios";
 
+const processSongs = async ( token, tracks ) => {
+  const trackIds = tracks.data.items.map(song => song.id).join(",");
+  const trackDataResponse = await axios.get(
+    `https://api.spotify.com/v1/audio-features/?ids=${trackIds}`,
+    { headers: { Authorization: `Bearer ${token}` } }
+  );
+  const trackData = trackDataResponse.data.audio_features;
+  const topTrackData = tracks.data.items.map((song, index) => {
+    const { valence, mode, energy, id } = trackData[index];
+    return {
+      name: song.name,
+      artist: song.artists[0].name,
+      id: song.id,
+      emoValue: (valence + mode + energy) / 3
+    };
+  });
+  return topTrackData;
+}
+
 const Spotify = {
   getAudioAnalysis: async ({ id, token }) => {
     if (id === undefined) return;
@@ -59,24 +78,30 @@ const Spotify = {
       `https://api.spotify.com/v1/me/top/tracks?limit=50`,
       { headers: { Authorization: `Bearer ${token}` } }
     );
-    const trackIds = tracks.data.items.map(song => song.id).join(",");
-    const trackDataResponse = await axios.get(
-      `https://api.spotify.com/v1/audio-features/?ids=${trackIds}`,
-      { headers: { Authorization: `Bearer ${token}` } }
-    );
-    const trackData = trackDataResponse.data.audio_features;
-    const topTrackData = tracks.data.items.map((song, index) => {
-      const { valence, mode, energy, id } = trackData[index];
-      return {
-        name: song.name,
-        artist: song.artists[0].name,
-        id: song.id,
-        emoValue: (valence + mode + energy) / 3
-      };
-    });
+    // const trackIds = tracks.data.items.map(song => song.id).join(",");
+    // const trackDataResponse = await axios.get(
+    //   `https://api.spotify.com/v1/audio-features/?ids=${trackIds}`,
+    //   { headers: { Authorization: `Bearer ${token}` } }
+    // );
+    // const trackData = trackDataResponse.data.audio_features;
+    // const topTrackData = tracks.data.items.map((song, index) => {
+    //   const { valence, mode, energy, id } = trackData[index];
+    //   return {
+    //     name: song.name,
+    //     artist: song.artists[0].name,
+    //     id: song.id,
+    //     emoValue: (valence + mode + energy) / 3
+    //   };
+    // });
+    const topTrackData = await processSongs(token, tracks);
     return topTrackData;
   },
-  getTopTrackData: async ({ token }) => {}
+  getRecommended: async ({ token, id }) => {
+    const tracks = await axios.get(`https://api.spotify.com/v1/recommendations?seed_tracks=${id}`,
+    { headers: { Authorization: `Bearer ${token}` } });
+    const recommendedData = await processSongs(token, tracks)
+    return recommendedData;
+  }
 };
 
 export default Spotify;
