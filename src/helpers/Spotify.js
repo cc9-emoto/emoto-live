@@ -78,21 +78,6 @@ const Spotify = {
       `https://api.spotify.com/v1/me/top/tracks?limit=50`,
       { headers: { Authorization: `Bearer ${token}` } }
     );
-    // const trackIds = tracks.data.items.map(song => song.id).join(",");
-    // const trackDataResponse = await axios.get(
-    //   `https://api.spotify.com/v1/audio-features/?ids=${trackIds}`,
-    //   { headers: { Authorization: `Bearer ${token}` } }
-    // );
-    // const trackData = trackDataResponse.data.audio_features;
-    // const topTrackData = tracks.data.items.map((song, index) => {
-    //   const { valence, mode, energy, id } = trackData[index];
-    //   return {
-    //     name: song.name,
-    //     artist: song.artists[0].name,
-    //     id: song.id,
-    //     emoValue: (valence + mode + energy) / 3
-    //   };
-    // });
     const topTrackData = await processSongs(token, tracks);
     return topTrackData;
   },
