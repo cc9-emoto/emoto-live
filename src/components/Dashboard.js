@@ -71,7 +71,6 @@ const Dashboard = () => {
   };
 
   const getNextSong = async () => {
-    console.log("GET NEXT SONG");
     let filteredSongs = await db.songs.filter(song => !song.played).toArray();
     const token = Cookies.get("emoto-access");
     if (filteredSongs.length === 0 && offset > 0) {
