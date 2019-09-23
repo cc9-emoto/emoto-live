@@ -52,6 +52,7 @@ const Speech = ({ player, voiceLang, setVoiceLang }) => {
         player.current.previousTrack();
       }
       if (text.toLowerCase().includes("police please")) {
+        console.log("police response");
         secretPlay();
       }
     };
