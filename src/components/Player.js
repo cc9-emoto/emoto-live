@@ -13,7 +13,9 @@ const Player = ({
   setPlayerState,
   player,
   playlist,
-  getNextSong
+  getNextSong,
+  offset,
+  setOffset
 }) => {
   const requestNewToken = async () => {
     const refreshToken = Cookies.get("emoto-refresh");
@@ -72,11 +74,12 @@ const Player = ({
       playMusic({ device_id });
     });
     player.current.addListener("player_state_changed", async state => {
-      if (state.position > state.duration - 300 && state.paused) {
-        const offset = state.track_window.previous_tracks.length;
+      if (state && state.position > state.duration - 300 && state.paused) {
         await getNextSong();
-        playMusic({ device_id: player.current._options.id, offset });
+        setOffset((prevProps) => prevProps + 1);
+        playMusic({ device_id: player.current._options.id, offset: offset + 1 });
       }
+      if (state === null) playMusic({ device_id: player.current._options.id });
     });
     startStatePolling();
   };
@@ -92,6 +95,16 @@ const Player = ({
     const seekTo = Math.round((duration * clickX) / windowX);
     player.current.seek(seekTo);
   };
+
+  const nextTrack = async () => {
+    console.log(playerState);
+    setOffset((prevProps) => prevProps + 1);
+    if (playerState.track_window.next_tracks.length === 0) {
+      await getNextSong();
+      playMusic({ device_id: player.current._options.id, offset: offset + 1 });
+    }
+    player.current.nextTrack()
+  }
 
   if (playerState && playlist) {
     const { position, duration, paused } = playerState;
@@ -129,7 +142,7 @@ const Player = ({
                 <img src={pause} />
               </button>
             )}
-            <button onClick={() => player.current.nextTrack()}>
+            <button onClick={() => nextTrack()}>
               <img src={skip} />
             </button>
           </div>

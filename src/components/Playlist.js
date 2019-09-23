@@ -3,9 +3,9 @@ import playOnly from "../assets/images/playOnly.svg";
 import "../styles/Playlist.scss";
 
 const Playlist = ({ upcoming, previous, current }) => {
-  const playlistItem = song => {
+  const playlistItem = (song, index) => {
     return (
-      <div className="playlist__item" key={song.name}>
+      <div className="playlist__item" key={song.name + index}>
         <div className="playlist__itemLeft">
           <img src={playOnly} alt="select cursor" />
         </div>
@@ -21,10 +21,11 @@ const Playlist = ({ upcoming, previous, current }) => {
     <div className="playlist">
       <div className="playlist__top">
         <h1>PLAYLIST</h1>
-        {previous.map(song => playlistItem(song))}
+        {previous.map((song, index) => playlistItem(song, index))}
         {current && playlistItem(current)}
-        {upcoming.map(song => playlistItem(song))}
+        {upcoming.map((song, index) => playlistItem(song, index))}
       </div>
+      <div className="playlist__bottom"></div>
       <div className="playlist__bottom"></div>
     </div>
   );
