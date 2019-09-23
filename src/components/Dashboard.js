@@ -122,7 +122,6 @@ const Dashboard = () => {
           player={player}
           voiceLang={voiceLang}
           setVoiceLang={setVoiceLang}
-          playlist={playlist}
         />
 
         {vis === 1 ? (
