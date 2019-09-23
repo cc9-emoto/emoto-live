@@ -2,7 +2,6 @@ import React from "react";
 // import axiosConfig from "../helpers/axiosConfig.js";
 import axios from "axios";
 import "../styles/Login.scss";
-import "bootstrap/dist/css/bootstrap.css";
 import "animate.css";
 import AOS from "aos";
 import "aos/dist/aos.css";
@@ -27,7 +26,6 @@ const Login = () => {
       }
     );
     window.open(response.data);
-    console.log(response);
   };
 
   return (
@@ -48,178 +46,141 @@ const Login = () => {
       </nav>
 
       <section className="home">
-        <div className="container">
-          <div className="row">
-            <div
-              data-aos="fade-down"
-              className="col-lg-6 col-md-4 col-sm-4 col-xs-4"
-            ></div>
-            <div className="home__description animated fadeInDown delay-1s col-lg-6 col-md-8 col-sm-8 col-xs-8">
-              <h1 className="home__description--big">
-                Music for every emotion.
-              </h1>
-              <p className="home__description--small">
-                Infinite music recommendations,
-                <br />
-                powered by facial recognition
-              </p>
-              <button
-                type="button"
-                className="home__login--btn btn btn-lg"
-                onClick={handleLogin}
-              >
-                <img src={spotifyLogo} />
-                Login with Spotify
-              </button>
-            </div>
+        <div className="home__description animated fadeInDown delay-1s">
+            <h1 className="home__description--big">Music for every emotion.</h1>
+            <p className="home__description--small">
+              Infinite music recommendations, <br /> powered by facial recognition
+            </p>
+            <button className="home__loginBtn" onClick={handleLogin} >
+              <img src={spotifyLogo} />
+              <div className="home__loginBtnText" >
+                <h2>Login with Spotify</h2>
+                <small>(Requires Spotify Premium)</small>
+              </div>
+            </button>
           </div>
-        </div>
       </section>
 
       <section className="visual">
-        <div className="container">
-          <div data-aos="fade-right" className="row">
-            <div className="description col-lg-11 col-md-11 col-sm-11 col-xs-11">
-              <p className="description__detail">
-                Equalizer that responds to <br />
-                your music and your mood.
-              </p>
-              <h1 className="description__emoto">
-                Visualize <br />
-                your music.
-              </h1>
-            </div>
-            <div className="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
-          </div>
+        <div data-aos="fade-right" className="description">
+          <p className="description__detail">
+            Equalizer that responds to <br />
+            your music and your mood.
+          </p>
+          <h1 className="description__emoto">
+            Visualize <br />
+            your music.
+          </h1>
         </div>
       </section>
 
       <section className="speaker">
-        <div className="container">
-          <div className="row">
-            <div className="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
-            <div
-              data-aos="fade-left"
-              className="description col-lg-11 col-md-11 col-sm-11 col-xs-11"
-            >
-              <p className="description__detail">
-                Always-on voice recognition <br />
-                listening to your every command.
-              </p>
-              <h1 className="description__emoto">
-                Control music <br />
-                with your voice.
-              </h1>
-            </div>
-          </div>
-        </div>
+      <div data-aos="fade-left" className="description" >
+        <p className="description__detail">
+          Always-on voice recognition <br />
+          listening to your every command.
+        </p>
+        <h1 className="description__emoto">
+          Control music <br />
+          with your voice.
+        </h1>
+      </div>
       </section>
 
       <section className="ai">
-        <div className="container">
-          <div className="row">
-            <div
-              data-aos="fade-right"
-              className="description col-lg-11 col-md-11 col-sm-11 col-xs-11"
-            >
-              <p className="description__detail">
-                Cutting-edge computer vision algorithm
-                <br />
-                detects changes in your emotional state.
-              </p>
-              <h1 className="description__emoto">
-                Powered by <br />
-                AI Facial Analysis
-              </h1>
-            </div>
-            <div className="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
-          </div>
+        <div className="description" data-aos="fade-right">
+          <p className="description__detail">
+            Cutting-edge computer vision algorithm
+            <br />
+            detects changes in your emotional state.
+          </p>
+          <h1 className="description__emoto">
+            Powered by <br /> AI Facial Analysis
+          </h1>
         </div>
       </section>
 
       <section className="team">
-        <div className="container">
-          <div data-aos="fade-right" className="description">
-            <h1 className="description__emoto">Meet the team.</h1>
+        <div data-aos="fade-right" className="description">
+          <h1 className="description__emoto">Meet the team.</h1>
+        </div>
+        <div className="faces">
+          <div data-aos="fade-up" className="description__person wilson">
+            <div
+              className="team__head"
+              style={{ backgroundImage: `url(${wilson})` }}
+            ></div>
+            <button
+              className="team__btn"
+              onClick={() => {
+                window.open(
+                  "https://www.linkedin.com/in/wilsonplau",
+                  "_blank"
+                );
+              }}
+            >
+              Wilson
+            </button>
           </div>
-          <div className="faces">
-            <div data-aos="fade-up" className="description__person wilson">
-              <div
-                className="team__head"
-                style={{ backgroundImage: `url(${wilson})` }}
-              ></div>
-              <button
-                className="team__btn"
-                onClick={() => {
-                  window.open(
-                    "https://www.linkedin.com/in/wilsonplau",
-                    "_blank"
-                  );
-                }}
-              >
-                Wilson
-              </button>
-            </div>
+          <div
+            data-aos="fade-up"
+            data-aos-delay="200"
+            className="description__person matt"
+          >
             <div
-              data-aos="fade-up"
-              data-aos-delay="200"
-              className="description__person matt"
+              className="team__head matt"
+              style={{ backgroundImage: `url(${matt})` }}
+            ></div>
+            <button
+              className="team__btn"
+              onClick={() => {
+                window.open("https://www.linkedin.com/in/mc255v", "_blank");
+              }}
             >
-              <div
-                className="team__head matt"
-                style={{ backgroundImage: `url(${matt})` }}
-              ></div>
-              <button
-                className="team__btn"
-                onClick={() => {
-                  window.open("https://www.linkedin.com/in/mc255v", "_blank");
-                }}
-              >
-                Matt
-              </button>
-            </div>
+              Matt
+            </button>
+          </div>
+          <div
+            data-aos="fade-up"
+            data-aos-delay="400"
+            className="description__person go"
+          >
             <div
-              data-aos="fade-up"
-              data-aos-delay="400"
-              className="description__person go"
+              className="team__head"
+              style={{ backgroundImage: `url(${go})` }}
+            ></div>
+            <button
+              className="team__btn"
+              onClick={() => {
+                window.open(
+                  "https://www.linkedin.com/in/go-nakano/",
+                  "_blank"
+                );
+              }}
             >
-              <div
-                className="team__head"
-                style={{ backgroundImage: `url(${go})` }}
-              ></div>
-              <button
-                className="team__btn"
-                onClick={() => {
-                  window.open(
-                    "https://www.linkedin.com/in/go-nakano/",
-                    "_blank"
-                  );
-                }}
-              >
-                Go
-              </button>
-            </div>
+              Go
+            </button>
+          </div>
+          <div
+            data-aos="fade-up"
+            data-aos-delay="600"
+            className="description__person rina"
+          >
             <div
-              data-aos="fade-up"
-              data-aos-delay="600"
-              className="description__person rina"
+              className="team__head"
+              style={{ backgroundImage: `url(${rina})` }}
+            ></div>
+            <button
+              className="team__btn"
+              onClick={() => {
+                window.open(
+                  "https://www.linkedin.com/in/rinasakamaki/",
+                  "_blank"
+                );
+              }}
             >
-              <div
-                className="team__head"
-                style={{ backgroundImage: `url(${rina})` }}
-              ></div>
-              <button
-                className="team__btn"
-                onClick={() => {
-                  window.open(
-                    "https://www.linkedin.com/in/rinasakamaki/",
-                    "_blank"
-                  );
-                }}
-              >
-                Rina
-              </button>
-            </div>
+              Rina
+            </button>
           </div>
         </div>
       </section>
