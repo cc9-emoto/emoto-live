@@ -91,13 +91,11 @@ const Player = ({
     const clickX = e.clientX;
     const windowX = window.innerWidth;
     const duration = playerState.duration;
-    console.log(clickX, windowX);
     const seekTo = Math.round((duration * clickX) / windowX);
     player.current.seek(seekTo);
   };
 
   const nextTrack = async () => {
-    console.log(playerState);
     setOffset((prevProps) => prevProps + 1);
     if (playerState.track_window.next_tracks.length === 0) {
       await getNextSong();
