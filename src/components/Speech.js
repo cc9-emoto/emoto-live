@@ -55,7 +55,6 @@ const Speech = ({ player, voiceLang, setVoiceLang, playlist }) => {
         text.toLowerCase().includes("test") ||
         text.toLowerCase().includes("police please")
       ) {
-        console.log("Oh, yeah!");
         secretPlay();
       }
     };

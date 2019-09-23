@@ -101,7 +101,6 @@ const Spotify = {
       `https://api.spotify.com/v1/recommendations?seed_tracks=${id}`,
       { headers: { Authorization: `Bearer ${token}` } }
     );
-    console.log(tracks.data.tracks);
     const recommendedData = await Spotify.processSongs(
       token,
       tracks.data.tracks

@@ -3,7 +3,7 @@ import Player from "./Player";
 import Cookies from "js-cookie";
 
 import "../styles/Dashboard.scss";
-import "../styles/Playlist.scss";
+// import "../styles/Playlist.scss";
 import colorHelper from "../helpers/colorHelper";
 import VisualizationToggle from "../components/VisualizationToggle";
 import Playlist from "../components/Playlist";
@@ -72,7 +72,6 @@ const Dashboard = () => {
   };
 
   const getNextSong = async () => {
-    console.log("GET NEXT SONG");
     let filteredSongs = await db.songs.filter(song => !song.played).toArray();
     const token = Cookies.get("emoto-access");
     if (filteredSongs.length === 0 && offset > 0) {
@@ -103,30 +102,14 @@ const Dashboard = () => {
     const count = await db.songs.count();
     if (count > 0) {
       const data = await db.songs.toArray();
-      // setSongs(data);
+      setSongs(data);
     } else {
       const token = Cookies.get("emoto-access");
       const data = await Spotify.getTopTracks({ token });
       const dataWithPlayed = data.map(song => ({ ...song, played: false }));
       await db.songs.bulkAdd(dataWithPlayed);
-      // setSongs(data);
+      setSongs(data);
     }
-  };
-
-  const getNextSong = async () => {
-    const songs = await db.songs.filter(song => !song.played).toArray();
-    const newSong = playlistHelper.getNextSong({
-      emoValue: emotionValue,
-      songs
-    });
-    console.log("GET NEXT SONG");
-    db.songs.update(newSong.id, { played: true });
-    const token = Cookies.get("emoto-access");
-    await Spotify.addToPlaylist({
-      songId: newSong.id,
-      playlistId: playlist,
-      token
-    });
   };
 
   return (
