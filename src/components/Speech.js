@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import "../styles/Speech.scss";
 import Cookies from "js-cookie";
 import Spotify from "../helpers/Spotify";
-const axios = "axios";
 
 const SpeechRecognition =
   window.SpeechRecognition || window.webkitSpeechRecognition;
@@ -26,14 +25,12 @@ const Speech = ({ player, voiceLang, setVoiceLang, playlist }) => {
     await recognition.start();
     recognition.onresult = async e => {
       const text = e.results[e.resultIndex][0].transcript;
-      console.log(text);
       if (
         text.toLowerCase().includes("stop") ||
         text.includes("ポーズ") ||
         text.includes("止まれ") ||
         text.includes("ストップ")
       ) {
-        console.log("STOP");
         player.current.pause();
       }
       if (
@@ -41,7 +38,6 @@ const Speech = ({ player, voiceLang, setVoiceLang, playlist }) => {
         text.toLowerCase().includes("start") ||
         text.includes("スタート")
       ) {
-        console.log("PLAY");
         player.current.resume();
       }
       if (
@@ -50,11 +46,9 @@ const Speech = ({ player, voiceLang, setVoiceLang, playlist }) => {
         text.includes("スキップ") ||
         text.includes("次")
       ) {
-        console.log("SKIP");
         player.current.nextTrack();
       }
       if (text.toLowerCase().includes("back") || text.includes("戻れ")) {
-        console.log("BACK");
         player.current.previousTrack();
       }
       if (
@@ -71,14 +65,14 @@ const Speech = ({ player, voiceLang, setVoiceLang, playlist }) => {
     <div className="speech">
       <button
         className="speech__button"
-        aria-selected={voiceLang === "en-US"}
+        aria-expanded={voiceLang === "en-US"}
         onClick={() => setVoiceLang("en-US")}
       >
         EN
       </button>
       <button
         className="speech__button"
-        aria-selected={voiceLang === "ja-JP"}
+        aria-expanded={voiceLang === "ja-JP"}
         onClick={() => setVoiceLang("ja-JP")}
       >
         JP
