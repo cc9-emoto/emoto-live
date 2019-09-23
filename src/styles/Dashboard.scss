@@ -4,7 +4,18 @@
   grid-template-columns: 4fr 1fr;
   grid-template-rows: 1fr 85px;
   background-color: black;
+
+  @media (max-width: 1040px) {
+    grid-template-columns: 2fr 1fr;
+  }
+
+  @media (max-width: 430px) {
+    grid-template-columns: 1fr;
+    display: flex;
+    flex-direction: column;
+  }
 }
+
 .dashboard__main {
   flex: 1;
   display: flex;
@@ -12,6 +23,7 @@
   justify-content: center;
   position: relative;
 }
+
 .dashboard__emotionValue {
   padding: 10px 25px;
   background-color: black;
