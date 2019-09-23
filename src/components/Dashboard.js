@@ -163,6 +163,10 @@ const Dashboard = () => {
         upcoming={playerState ? playerState.track_window.next_tracks : []}
         previous={playerState ? playerState.track_window.previous_tracks : []}
         current={playerState ? playerState.track_window.current_track : null}
+        offset={offset}
+        setOffset={setOffset}
+        player={player}
+        playlist={playlist}
       />
       <Player
         getNextSong={getNextSong}

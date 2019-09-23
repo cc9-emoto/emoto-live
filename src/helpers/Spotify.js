@@ -86,7 +86,17 @@ const Spotify = {
     console.log(tracks.data.tracks);
     const recommendedData = await Spotify.processSongs(token, tracks.data.tracks)
     return recommendedData;
-  }
+  },
+  playMusic: async ({ device_id, offset = 0, token, playlist }) => {
+    await axios.put(
+      `https://api.spotify.com/v1/me/player/play?device_id=${device_id}`,
+      {
+        context_uri: `spotify:playlist:${playlist}`,
+        offset: { position: offset }
+      },
+      { headers: { Authorization: `Bearer ${token}` } }
+    );
+  },
 };
 
 export default Spotify;
