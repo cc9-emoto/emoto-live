@@ -29,17 +29,17 @@ const Player = ({
     return accessToken;
   };
 
-  // const waitForSpotify = () => {
-  //   return new Promise(resolve => {
-  //     if ("Spotify" in window) {
-  //       resolve();
-  //     } else {
-  //       window.onSpotifyWebPlaybackSDKReady = () => {
-  //         resolve();
-  //       };
-  //     }
-  //   });
-  // };
+  const waitForSpotify = () => {
+    return new Promise(resolve => {
+      if ("Spotify" in window) {
+        resolve();
+      } else {
+        window.onSpotifyWebPlaybackSDKReady = () => {
+          resolve();
+        };
+      }
+    });
+  };
 
   const startStatePolling = () => {
     setInterval(async () => {
@@ -61,7 +61,7 @@ const Player = ({
   };
 
   const init = async () => {
-    // await waitForSpotify();
+    await waitForSpotify();
     const token = await requestNewToken();
     player.current = new window.Spotify.Player({
       name: "EMOTO",
@@ -76,8 +76,11 @@ const Player = ({
     player.current.addListener("player_state_changed", async state => {
       if (state && state.position > state.duration - 300 && state.paused) {
         await getNextSong();
-        setOffset((prevProps) => prevProps + 1);
-        playMusic({ device_id: player.current._options.id, offset: offset + 1 });
+        setOffset(prevProps => prevProps + 1);
+        playMusic({
+          device_id: player.current._options.id,
+          offset: offset + 1
+        });
       }
       if (state === null) playMusic({ device_id: player.current._options.id });
     });
@@ -96,13 +99,13 @@ const Player = ({
   };
 
   const nextTrack = async () => {
-    setOffset((prevProps) => prevProps + 1);
+    setOffset(prevProps => prevProps + 1);
     if (playerState.track_window.next_tracks.length === 0) {
       await getNextSong();
       playMusic({ device_id: player.current._options.id, offset: offset + 1 });
     }
-    player.current.nextTrack()
-  }
+    player.current.nextTrack();
+  };
 
   if (playerState && playlist) {
     const { position, duration, paused } = playerState;

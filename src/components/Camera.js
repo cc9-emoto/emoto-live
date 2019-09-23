@@ -1,4 +1,3 @@
-// eslint-disable-next-line react-hooks/exhaustive-deps
 import React, { useRef, useEffect } from "react";
 import Webcam from "react-webcam";
 import axios from "axios";
@@ -25,11 +24,6 @@ const Camera = ({ setEmotionValue }) => {
     );
     return response.data;
   };
-
-  // const getNextSong = async () => {
-  //   const webcamData = webcam.current.getScreenshot();
-  //   const feelings = await submitData(webcamData);
-  // };
 
   return (
     <div className="camera">
