@@ -5,6 +5,23 @@ const VisualizationA = ({ position }) => {
   const canvas = useRef();
   const ctx = useRef();
 
+  useEffect(() => {
+    canvas.current = document.getElementById("canvas");
+    ctx.current = canvas.current.getContext("2d");
+    draw();
+  }, []);
+
+  useEffect(() => {
+    draw();
+  }, [position]);
+
+  const drawCircle = (x, y, radius) => {
+    ctx.current.beginPath();
+    ctx.current.arc(x, y, radius, 0, 2 * Math.PI, false);
+    ctx.current.fillStyle = "white";
+    ctx.current.fill();
+  };
+
   const draw = () => {
     ctx.current.clearRect(0, 0, canvas.current.width, canvas.current.height);
     for (let i = 0; i < 100; i++) {
@@ -16,19 +33,6 @@ const VisualizationA = ({ position }) => {
         );
       }
     }
-  };
-
-  useEffect(() => {
-    canvas.current = document.getElementById("canvas");
-    ctx.current = canvas.current.getContext("2d");
-    draw();
-  }, [draw]);
-
-  const drawCircle = (x, y, radius) => {
-    ctx.current.beginPath();
-    ctx.current.arc(x, y, radius, 0, 2 * Math.PI, false);
-    ctx.current.fillStyle = "white";
-    ctx.current.fill();
   };
 
   return (
