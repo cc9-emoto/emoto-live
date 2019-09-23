@@ -1,5 +1,4 @@
 import React from "react";
-// import axiosConfig from "../helpers/axiosConfig.js";
 import axios from "axios";
 import "../styles/Login.scss";
 import "animate.css";
@@ -16,7 +15,6 @@ AOS.init();
 
 const Login = () => {
   const handleLogin = async () => {
-    // const response = await axiosConfig.get("/spotify/authorize");
     const response = await axios.get(
       "https://hur7tfyff1.execute-api.us-east-2.amazonaws.com/Prod/spotify/authorization",
       {

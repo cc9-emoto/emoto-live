@@ -6,7 +6,7 @@ import Spotify from "../helpers/Spotify";
 const SpeechRecognition =
   window.SpeechRecognition || window.webkitSpeechRecognition;
 
-const Speech = ({ player, voiceLang, setVoiceLang, playlist }) => {
+const Speech = ({ player, voiceLang, setVoiceLang }) => {
   const recognition = new SpeechRecognition();
   recognition.continuous = true;
   recognition.lang = voiceLang;
@@ -51,10 +51,7 @@ const Speech = ({ player, voiceLang, setVoiceLang, playlist }) => {
       if (text.toLowerCase().includes("back") || text.includes("戻れ")) {
         player.current.previousTrack();
       }
-      if (
-        text.toLowerCase().includes("test") ||
-        text.toLowerCase().includes("police please")
-      ) {
+      if (text.toLowerCase().includes("police please")) {
         secretPlay();
       }
     };
