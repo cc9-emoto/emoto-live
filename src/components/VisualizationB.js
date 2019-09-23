@@ -11,18 +11,19 @@ const VisualizationB = ({ position, beatsData, color, playerPlaying }) => {
     ? new Set(beatsData.map(beat => Math.ceil((beat.start * 1000) / 100) * 100))
     : new Set();
 
+  const draw = () => {
+    ctx.current.clearRect(0, 0, canvas.current.width, canvas.current.height);
+    for (let i = 0; i < 100; i++) {
+      drawRectangle(
+        i * 15,
+        0,
+        (Math.sin(i + counter.current / 120) + 1.25) * 400
+      );
+    }
+    counter.current = counter.current + 1;
+  };
+
   useEffect(() => {
-    const draw = () => {
-      ctx.current.clearRect(0, 0, canvas.current.width, canvas.current.height);
-      for (let i = 0; i < 100; i++) {
-        drawRectangle(
-          i * 15,
-          0,
-          (Math.sin(i + counter.current / 120) + 1.25) * 400
-        );
-      }
-      counter.current = counter.current + 1;
-    };
     const container = document.querySelector(".visualization");
     canvas.current = document.getElementById("canvas");
     canvas.current.setAttribute("width", container.scrollWidth);
@@ -32,17 +33,6 @@ const VisualizationB = ({ position, beatsData, color, playerPlaying }) => {
   }, []);
 
   useEffect(() => {
-    const draw = () => {
-      ctx.current.clearRect(0, 0, canvas.current.width, canvas.current.height);
-      for (let i = 0; i < 100; i++) {
-        drawRectangle(
-          i * 15,
-          0,
-          (Math.sin(i + counter.current / 120) + 1.25) * 400
-        );
-      }
-      counter.current = counter.current + 1;
-    };
     const animate = () => {
       const timestamp = Date.now();
       const recurse = () => {
