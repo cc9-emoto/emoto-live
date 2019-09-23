@@ -43,16 +43,16 @@ const Dashboard = () => {
   }, []);
 
   useEffect(() => {
-    if (playlist) getSongData();
-  }, [playlist]);
+    if (playlist && songs) getSongData();
+  }, [playlist, songs]);
 
   const getSongData = async () => {
-    console.log("get SongData");
     const token = Cookies.get("emoto-access");
     const res = await Spotify.getPlaylistTracks({
       token,
       playlistId: playlist
     });
+    if (res.items.length === 0) getNextSong();
     const tracks = res.items.map(item => item.track.id);
     const newData = await Spotify.getAudioAnalysis({ id: tracks[0], token });
     if (newData) setData(newData);
@@ -69,6 +69,34 @@ const Dashboard = () => {
       Cookies.set("emoto-playlist", data.id);
       setPlaylist(data.id);
     }
+  };
+
+  const getNextSong = async () => {
+    console.log("GET NEXT SONG");
+    let filteredSongs = await db.songs.filter(song => !song.played).toArray();
+    const token = Cookies.get("emoto-access");
+    if (filteredSongs.length === 0 && offset > 0) {
+      const [oneSong] = (await db.songs.limit(1).toArray()) && [
+        { id: "3NPiANHZYahLZhUT00GwTw" }
+      ];
+      const recommended = await Spotify.getRecommended({ token }, oneSong);
+      const dataWithPlayed = recommended.map(song => ({
+        ...song,
+        played: false
+      }));
+      await db.songs.bulkAdd(dataWithPlayed);
+      filteredSongs = await db.songs.filter(song => !song.played).toArray();
+    }
+    const newSong = await playlistHelper.getNextSong({
+      emotionValue,
+      songs: filteredSongs
+    });
+    db.songs.update(newSong.id, { played: true });
+    await Spotify.addToPlaylist({
+      songId: newSong.id,
+      playlistId: playlist,
+      token
+    });
   };
 
   const getTopSongs = async () => {

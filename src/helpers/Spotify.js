@@ -1,6 +1,24 @@
 import axios from "axios";
 
 const Spotify = {
+  processSongs: async (token, tracks) => {
+    const trackIds = tracks.map(song => song.id).join(",");
+    const trackDataResponse = await axios.get(
+      `https://api.spotify.com/v1/audio-features/?ids=${trackIds}`,
+      { headers: { Authorization: `Bearer ${token}` } }
+    );
+    const trackData = trackDataResponse.data.audio_features;
+    const topTrackData = tracks.map((song, index) => {
+      const { valence, mode, energy, id } = trackData[index];
+      return {
+        name: song.name,
+        artist: song.artists[0].name,
+        id: song.id,
+        emoValue: (valence + mode + energy) / 3
+      };
+    });
+    return topTrackData;
+  },
   getAudioAnalysis: async ({ id, token }) => {
     if (id === undefined) return;
     try {
@@ -58,21 +76,7 @@ const Spotify = {
       `https://api.spotify.com/v1/me/top/tracks?limit=50`,
       { headers: { Authorization: `Bearer ${token}` } }
     );
-    const trackIds = tracks.data.items.map(song => song.id).join(",");
-    const trackDataResponse = await axios.get(
-      `https://api.spotify.com/v1/audio-features/?ids=${trackIds}`,
-      { headers: { Authorization: `Bearer ${token}` } }
-    );
-    const trackData = trackDataResponse.data.audio_features;
-    const topTrackData = tracks.data.items.map((song, index) => {
-      const { valence, mode, energy, id } = trackData[index];
-      return {
-        name: song.name,
-        artist: song.artists[0].name,
-        id: song.id,
-        emoValue: (valence + mode + energy) / 3
-      };
-    });
+    const topTrackData = await Spotify.processSongs(token, tracks.data.items);
     return topTrackData;
   },
   startSecretTrack: async ({ token, deviceId }) => {
@@ -91,6 +95,18 @@ const Spotify = {
       }
     );
     return res.data;
+  },
+  getRecommended: async ({ token, id }) => {
+    const tracks = await axios.get(
+      `https://api.spotify.com/v1/recommendations?seed_tracks=${id}`,
+      { headers: { Authorization: `Bearer ${token}` } }
+    );
+    console.log(tracks.data.tracks);
+    const recommendedData = await Spotify.processSongs(
+      token,
+      tracks.data.tracks
+    );
+    return recommendedData;
   }
 };
 
