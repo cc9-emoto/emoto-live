@@ -61,7 +61,6 @@ const Dashboard = () => {
   const initPlaylist = async () => {
     const playlist = Cookies.get("emoto-playlist");
     if (playlist) {
-      console.log("you have playlist", playlist);
       setPlaylist(playlist);
     } else {
       const token = Cookies.get("emoto-access");
@@ -76,28 +75,32 @@ const Dashboard = () => {
     const count = await db.songs.count();
     if (count > 0) {
       const data = await db.songs.toArray();
-      setSongs(data);
+      // setSongs(data);
     } else {
       const token = Cookies.get("emoto-access");
       const data = await Spotify.getTopTracks({ token });
       const dataWithPlayed = data.map(song => ({ ...song, played: false }));
-      const res = await db.songs.bulkAdd(dataWithPlayed);
-      setSongs(data);
+      await db.songs.bulkAdd(dataWithPlayed);
+      // setSongs(data);
     }
   };
 
   const getNextSong = async () => {
     const songs = await db.songs.filter(song => !song.played).toArray();
-    const newSong = playlistHelper.getNextSong({ emoValue: 0.8, songs });
+    const newSong = playlistHelper.getNextSong({
+      emoValue: emotionValue,
+      songs
+    });
     console.log("GET NEXT SONG");
     db.songs.update(newSong.id, { played: true });
     const token = Cookies.get("emoto-access");
-    const data = await Spotify.addToPlaylist({
+    await Spotify.addToPlaylist({
       songId: newSong.id,
       playlistId: playlist,
       token
     });
   };
+
   return (
     <div className="dashboard">
       <div className="dashboard__main">

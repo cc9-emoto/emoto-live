@@ -4,37 +4,18 @@
   grid-template-columns: 4fr 1fr;
   grid-template-rows: 1fr 85px;
   background-color: black;
-  @media (max-width: 1000px) {
+
+  @media (max-width: 1040px) {
+    grid-template-columns: 2fr 1fr;
+  }
+
+  @media (max-width: 430px) {
+    grid-template-columns: 1fr;
     display: flex;
     flex-direction: column;
-    background-color: black;
-    overflow: scroll;
-  }
-  // @media screen and (max-width: 600px) {
-  //   height: 80vh;
-  //   display: grid;
-  //   grid-template-columns: 4fr 1fr;
-  //   grid-template-rows: 1fr 85px;
-  //   background-color: black;
-  // }
-  // @media screen and (max-width: 400px) {
-  //   height: 60vh;
-  //   display: grid;
-  //   grid-template-columns: 4fr 1fr;
-  //   grid-template-rows: 1fr 85px;
-  //   background-color: black;
-  // }
-  // @media screen and (max-width: 200px) {
-  //   height: 40vh;
-  //   display: grid;
-  //   grid-template-columns: 4fr 1fr;
-  //   grid-template-rows: 1fr 85px;
-  //   background-color: black;
-  // }
-  .visualization {
-    height: 100%;
   }
 }
+
 .dashboard__main {
   flex: 1;
   display: flex;
@@ -48,6 +29,7 @@
     background-color: black;
   }
 }
+
 .dashboard__emotionValue {
   padding: 10px 25px;
   background-color: black;
