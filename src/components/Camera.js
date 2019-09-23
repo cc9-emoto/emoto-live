@@ -8,13 +8,8 @@ const Camera = ({ setEmotionValue }) => {
   const videoConstraints = { width: 450, height: 250, facingMode: "user" };
 
   useEffect(() => {
-    const updateEmotionValue = async () => {
-      const webcamData = webcam.current.getScreenshot();
-      const feelings = await submitData(webcamData);
-      setEmotionValue(feelings.happiness + 0.5 * feelings.neutral);
-    };
     setInterval(updateEmotionValue, 10000);
-  }, [setEmotionValue]);
+  }, []);
 
   const submitData = async base64 => {
     const base64Data = base64.replace(/^data:image\/jpeg;base64,/, "");
@@ -25,6 +20,11 @@ const Camera = ({ setEmotionValue }) => {
     return response.data;
   };
 
+  const updateEmotionValue = async () => {
+    const webcamData = webcam.current.getScreenshot();
+    const feelings = await submitData(webcamData);
+    setEmotionValue(feelings.happiness + 0.5 * feelings.neutral);
+  };
   return (
     <div className="camera">
       <Webcam
