@@ -1,6 +1,6 @@
 import React from "react";
 // import axiosConfig from "../helpers/axiosConfig.js";
-import axios from 'axios';
+import axios from "axios";
 import "../styles/Login.scss";
 import "bootstrap/dist/css/bootstrap.css";
 import "animate.css";
@@ -18,11 +18,14 @@ AOS.init();
 const Login = () => {
   const handleLogin = async () => {
     // const response = await axiosConfig.get("/spotify/authorize");
-    const response = await axios.get("https://hur7tfyff1.execute-api.us-east-2.amazonaws.com/Prod/spotify/authorization", 
-      {headers: {
-      "Content-Type": "application/json"
-     }}
-    )
+    const response = await axios.get(
+      "https://hur7tfyff1.execute-api.us-east-2.amazonaws.com/Prod/spotify/authorization",
+      {
+        headers: {
+          "Content-Type": "application/json"
+        }
+      }
+    );
     window.open(response.data);
     console.log(response);
   };
@@ -49,10 +52,12 @@ const Login = () => {
           <div className="row">
             <div
               data-aos="fade-down"
-              className="col-lg-6 col-md-8 col-sm-8 col-xs-8"
+              className="col-lg-6 col-md-4 col-sm-4 col-xs-4"
             ></div>
-            <div className="home__description animated fadeInDown delay-1s col-lg-6 col-md-4 col-sm-4 col-xs-4">
-              <h1 className="home__description--big">Music for every emotion.</h1>
+            <div className="home__description animated fadeInDown delay-1s col-lg-6 col-md-8 col-sm-8 col-xs-8">
+              <h1 className="home__description--big">
+                Music for every emotion.
+              </h1>
               <p className="home__description--small">
                 Infinite music recommendations,
                 <br />
@@ -74,7 +79,7 @@ const Login = () => {
       <section className="visual">
         <div className="container">
           <div data-aos="fade-right" className="row">
-            <div className="description col-lg-6 col-md-6 col-sm-6 col-xs-6">
+            <div className="description col-lg-11 col-md-11 col-sm-11 col-xs-11">
               <p className="description__detail">
                 Equalizer that responds to <br />
                 your music and your mood.
@@ -84,7 +89,7 @@ const Login = () => {
                 your music.
               </h1>
             </div>
-            <div className="col-lg-6 col-md-6 col-sm-6 col-xs-6"></div>
+            <div className="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
           </div>
         </div>
       </section>
@@ -92,10 +97,10 @@ const Login = () => {
       <section className="speaker">
         <div className="container">
           <div className="row">
-            <div className="col-lg-5 col-md-6 col-sm-6 col-xs-6"></div>
+            <div className="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
             <div
               data-aos="fade-left"
-              className="description col-lg-7 col-md-6 col-sm-6 col-xs-6"
+              className="description col-lg-11 col-md-11 col-sm-11 col-xs-11"
             >
               <p className="description__detail">
                 Always-on voice recognition <br />
@@ -115,7 +120,7 @@ const Login = () => {
           <div className="row">
             <div
               data-aos="fade-right"
-              className="description col-lg-7 col-md-6 col-sm-6 col-xs-6"
+              className="description col-lg-11 col-md-11 col-sm-11 col-xs-11"
             >
               <p className="description__detail">
                 Cutting-edge computer vision algorithm
@@ -127,27 +132,22 @@ const Login = () => {
                 AI Facial Analysis
               </h1>
             </div>
-            <div className="col-lg-5 col-md-6 col-sm-6 col-xs-6"></div>
+            <div className="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
           </div>
         </div>
       </section>
 
       <section className="team">
         <div className="container">
-          <div className="row">
-            <div
-              data-aos="fade-right"
-              className="description col-lg-8 col-md-8 col-sm-8 col-xs-8"
-            >
-              <h1 className="description__emoto">Meet the team.</h1>
-            </div>
+          <div data-aos="fade-right" className="description">
+            <h1 className="description__emoto">Meet the team.</h1>
           </div>
-          <div className="row">
-            <div
-              data-aos="fade-up"
-              className="description__person col-lg-3 col-md-3 col-sm-3 col-xs-3"
-            >
-              <img className="team__head" src={wilson} alt="wilson"></img>
+          <div className="faces">
+            <div data-aos="fade-up" className="description__person wilson">
+              <div
+                className="team__head"
+                style={{ backgroundImage: `url(${wilson})` }}
+              ></div>
               <button
                 className="team__btn"
                 onClick={() => {
@@ -163,9 +163,12 @@ const Login = () => {
             <div
               data-aos="fade-up"
               data-aos-delay="200"
-              className="description__person col-lg-3 col-md-3 col-sm-3 col-xs-3"
+              className="description__person matt"
             >
-              <img className="team__head" src={matt} alt="matt"></img>
+              <div
+                className="team__head matt"
+                style={{ backgroundImage: `url(${matt})` }}
+              ></div>
               <button
                 className="team__btn"
                 onClick={() => {
@@ -178,9 +181,12 @@ const Login = () => {
             <div
               data-aos="fade-up"
               data-aos-delay="400"
-              className="description__person col-lg-3 col-md-3 col-sm-3 col-xs-3"
+              className="description__person go"
             >
-              <img className="team__head" src={go} alt="go"></img>
+              <div
+                className="team__head"
+                style={{ backgroundImage: `url(${go})` }}
+              ></div>
               <button
                 className="team__btn"
                 onClick={() => {
@@ -196,9 +202,12 @@ const Login = () => {
             <div
               data-aos="fade-up"
               data-aos-delay="600"
-              className="description__person col-lg-3 col-md-3 col-sm-3 col-xs-3"
+              className="description__person rina"
             >
-              <img className="team__head" src={rina} alt="rina"></img>
+              <div
+                className="team__head"
+                style={{ backgroundImage: `url(${rina})` }}
+              ></div>
               <button
                 className="team__btn"
                 onClick={() => {
