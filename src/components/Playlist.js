@@ -26,7 +26,6 @@ const Playlist = ({ upcoming, previous, current }) => {
         {upcoming.map((song, index) => playlistItem(song, index))}
       </div>
       <div className="playlist__bottom"></div>
-      <div className="playlist__bottom"></div>
     </div>
   );
 };
