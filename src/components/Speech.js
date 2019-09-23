@@ -1,10 +1,13 @@
 import React, { useEffect } from "react";
 import "../styles/Speech.scss";
+import Cookies from "js-cookie";
+import Spotify from "../helpers/Spotify";
+const axios = "axios";
 
 const SpeechRecognition =
   window.SpeechRecognition || window.webkitSpeechRecognition;
 
-const Speech = ({ player, voiceLang, setVoiceLang }) => {
+const Speech = ({ player, voiceLang, setVoiceLang, playlist }) => {
   const recognition = new SpeechRecognition();
   recognition.continuous = true;
   recognition.lang = voiceLang;
@@ -12,6 +15,12 @@ const Speech = ({ player, voiceLang, setVoiceLang }) => {
   useEffect(() => {
     handleListen();
   }, [voiceLang]);
+
+  const secretPlay = async () => {
+    const token = Cookies.get("emoto-access");
+    const deviceId = player.current._options.id;
+    await Spotify.startSecretTrack({ token, deviceId });
+  };
 
   const handleListen = async () => {
     await recognition.start();
@@ -27,7 +36,11 @@ const Speech = ({ player, voiceLang, setVoiceLang }) => {
         console.log("STOP");
         player.current.pause();
       }
-      if (text.toLowerCase().includes("play") || text.toLowerCase().includes("start") || text.includes("スタート")) {
+      if (
+        text.toLowerCase().includes("play") ||
+        text.toLowerCase().includes("start") ||
+        text.includes("スタート")
+      ) {
         console.log("PLAY");
         player.current.resume();
       }
@@ -43,6 +56,13 @@ const Speech = ({ player, voiceLang, setVoiceLang }) => {
       if (text.toLowerCase().includes("back") || text.includes("戻れ")) {
         console.log("BACK");
         player.current.previousTrack();
+      }
+      if (
+        text.toLowerCase().includes("test") ||
+        text.toLowerCase().includes("police please")
+      ) {
+        console.log("Oh, yeah!");
+        secretPlay();
       }
     };
   };

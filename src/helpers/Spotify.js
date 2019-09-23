@@ -76,7 +76,23 @@ const Spotify = {
     });
     return topTrackData;
   },
-  getTopTrackData: async ({ token }) => {}
+  startSecretTrack: async ({ token, deviceId }) => {
+    const uris = [
+      "spotify:track:3Y6XWs8xMlCngyIxNOFnsp",
+      "spotify:track:0qeKzbUsW0V4ZWRJrHNiD3",
+      "spotify:track:5AIbPmGJyxtXlabJHZtowQ"
+    ];
+    const res = await axios.put(
+      `https://api.spotify.com/v1/me/player/play?device_id=${deviceId}`,
+      { uris },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      }
+    );
+    return res.data;
+  }
 };
 
 export default Spotify;

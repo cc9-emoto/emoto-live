@@ -27,17 +27,17 @@ const Player = ({
     return accessToken;
   };
 
-  const waitForSpotify = () => {
-    return new Promise(resolve => {
-      if ("Spotify" in window) {
-        resolve();
-      } else {
-        window.onSpotifyWebPlaybackSDKReady = () => {
-          resolve();
-        };
-      }
-    });
-  };
+  // const waitForSpotify = () => {
+  //   return new Promise(resolve => {
+  //     if ("Spotify" in window) {
+  //       resolve();
+  //     } else {
+  //       window.onSpotifyWebPlaybackSDKReady = () => {
+  //         resolve();
+  //       };
+  //     }
+  //   });
+  // };
 
   const startStatePolling = () => {
     setInterval(async () => {
@@ -59,7 +59,7 @@ const Player = ({
   };
 
   const init = async () => {
-    await waitForSpotify();
+    // await waitForSpotify();
     const token = await requestNewToken();
     player.current = new window.Spotify.Player({
       name: "EMOTO",
