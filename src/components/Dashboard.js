@@ -3,7 +3,7 @@ import Player from "./Player";
 import Cookies from "js-cookie";
 
 import "../styles/Dashboard.scss";
-// import "../styles/Playlist.scss";
+import "../styles/Playlist.scss";
 import colorHelper from "../helpers/colorHelper";
 import VisualizationToggle from "../components/VisualizationToggle";
 import Playlist from "../components/Playlist";
