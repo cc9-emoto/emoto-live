@@ -1,6 +1,7 @@
 <img width="990" alt="header" src="https://user-images.githubusercontent.com/44974307/65474625-87c92a80-deb7-11e9-9889-d203aade2068.png">
 
-<h1>Music App detects your emotion</h1>
+<h1>Emoto</h1>
+Infinite music recommendations,powered by facial recognition.
 
 ## Key features
 - Visualizes your music based on your emotion
@@ -9,17 +10,17 @@
 
 ## Tech used
 - React
-- Spotify.API
-- MS Azure
 - IndexedDB
 - AWS Lambda functions
+- Spotify.API
+- MS Azure
 - Three.js
 - Anime.js
 
 
 ## How to use
 
-- Access Link(https://www.emoto.live/)
-- Login (It requires you to register premium account of Spotify)
-- Enjoy music!
-- Emoto detecs your emotion and apply to visualization and choose songs
+- Access our landing page (https://www.emoto.live/)
+- Login with Spotify (Requires Spotify Premium)
+- Enjoy the music!
+- The app automatically detecs your emotion and chooses songs for you
