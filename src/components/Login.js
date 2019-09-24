@@ -1,5 +1,4 @@
 import React from "react";
-// import axiosConfig from "../helpers/axiosConfig.js";
 import axios from "axios";
 import "../styles/Login.scss";
 import "animate.css";
@@ -16,7 +15,6 @@ AOS.init();
 
 const Login = () => {
   const handleLogin = async () => {
-    // const response = await axiosConfig.get("/spotify/authorize");
     const response = await axios.get(
       "https://hur7tfyff1.execute-api.us-east-2.amazonaws.com/Prod/spotify/authorization",
       {
@@ -47,18 +45,18 @@ const Login = () => {
 
       <section className="home">
         <div className="home__description animated fadeInDown delay-1s">
-            <h1 className="home__description--big">Music for every emotion.</h1>
-            <p className="home__description--small">
-              Infinite music recommendations, <br /> powered by facial recognition
-            </p>
-            <button className="home__loginBtn" onClick={handleLogin} >
-              <img src={spotifyLogo} />
-              <div className="home__loginBtnText" >
-                <h2>Login with Spotify</h2>
-                <small>(Requires Spotify Premium)</small>
-              </div>
-            </button>
-          </div>
+          <h1 className="home__description--big">Music for every emotion.</h1>
+          <p className="home__description--small">
+            Infinite music recommendations, <br /> powered by facial recognition
+          </p>
+          <button className="home__loginBtn" onClick={handleLogin}>
+            <img src={spotifyLogo} />
+            <div className="home__loginBtnText">
+              <h2>Login with Spotify</h2>
+              <small>(Requires Spotify Premium)</small>
+            </div>
+          </button>
+        </div>
       </section>
 
       <section className="visual">
@@ -75,16 +73,16 @@ const Login = () => {
       </section>
 
       <section className="speaker">
-      <div data-aos="fade-left" className="description" >
-        <p className="description__detail">
-          Always-on voice recognition <br />
-          listening to your every command.
-        </p>
-        <h1 className="description__emoto">
-          Control music <br />
-          with your voice.
-        </h1>
-      </div>
+        <div data-aos="fade-left" className="description">
+          <p className="description__detail">
+            Always-on voice recognition <br />
+            listening to your every command.
+          </p>
+          <h1 className="description__emoto">
+            Control music <br />
+            with your voice.
+          </h1>
+        </div>
       </section>
 
       <section className="ai">
@@ -113,10 +111,7 @@ const Login = () => {
             <button
               className="team__btn"
               onClick={() => {
-                window.open(
-                  "https://www.linkedin.com/in/wilsonplau",
-                  "_blank"
-                );
+                window.open("https://www.linkedin.com/in/wilsonplau", "_blank");
               }}
             >
               Wilson
@@ -152,10 +147,7 @@ const Login = () => {
             <button
               className="team__btn"
               onClick={() => {
-                window.open(
-                  "https://www.linkedin.com/in/go-nakano/",
-                  "_blank"
-                );
+                window.open("https://www.linkedin.com/in/go-nakano/", "_blank");
               }}
             >
               Go
