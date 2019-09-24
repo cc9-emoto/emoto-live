@@ -1,6 +1,7 @@
 <img width="990" alt="header" src="https://user-images.githubusercontent.com/44974307/65474625-87c92a80-deb7-11e9-9889-d203aade2068.png">
 
-<h1>Music App detects your emotion</h1>
+<h1>Emoto</h1>
+Infinite music recommendations,powered by facial recognition.
 
 ## Key features
 - Visualizes your music based on your emotion
