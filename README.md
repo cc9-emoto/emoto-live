@@ -8,10 +8,14 @@
 - Powered by AI Facial Analysis
 
 ## Tech used
+- React
 - Spotify.API
 - MS Azure
-- IndexDB
-- AWS lambda
+- IndexedDB
+- AWS Lambda functions
+- Three.js
+- Anime.js
+
 
 ## How to use
 
