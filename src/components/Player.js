@@ -48,38 +48,27 @@ const Player = ({
     }, 100);
   };
 
-  const playMusic = async ({ device_id, offset = 0 }) => {
-    const token = Cookies.get("emoto-access");
-    await axios.put(
-      `https://api.spotify.com/v1/me/player/play?device_id=${device_id}`,
-      {
-        context_uri: `spotify:playlist:${playlist}`,
-        offset: { position: offset }
-      },
-      { headers: { Authorization: `Bearer ${token}` } }
-    );
-  };
-
   const init = async () => {
     await waitForSpotify();
-    const token = await requestNewToken();
+    const requestToken = await requestNewToken();
     player.current = new window.Spotify.Player({
       name: "EMOTO",
       getOAuthToken: cb => {
-        cb(token);
+        cb(requestToken);
       }
     });
     await player.current.connect();
+    const token = Cookies.get("emoto-access");
     player.current.addListener("ready", ({ device_id }) => {
-      playMusic({ device_id });
+      Spotify.playMusic({ device_id, offset, token, playlist });
     });
     player.current.addListener("player_state_changed", async state => {
       if (state && state.position > state.duration - 300 && state.paused) {
         await getNextSong();
         setOffset((prevProps) => prevProps + 1);
-        playMusic({ device_id: player.current._options.id, offset: offset + 1 });
+        Spotify.playMusic({ device_id: player.current._options.id, offset: offset + 1, token, playlist });
       }
-      if (state === null) playMusic({ device_id: player.current._options.id });
+      if (state === null) Spotify.playMusic({ device_id: player.current._options.id, offset, token, playlist });
     });
     startStatePolling();
   };
@@ -99,7 +88,8 @@ const Player = ({
     setOffset((prevProps) => prevProps + 1);
     if (playerState.track_window.next_tracks.length === 0) {
       await getNextSong();
-      playMusic({ device_id: player.current._options.id, offset: offset + 1 });
+      const token = Cookies.get("emoto-access");
+      Spotify.playMusic({ device_id: player.current._options.id, offset: offset + 1, token, playlist });
     }
     player.current.nextTrack()
   }
