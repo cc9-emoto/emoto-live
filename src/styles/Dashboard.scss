@@ -4,12 +4,11 @@
   grid-template-columns: 4fr 1fr;
   grid-template-rows: 1fr 85px;
   background-color: black;
-
+  overflow: hidden;
   @media (max-width: 1040px) {
     grid-template-columns: 2fr 1fr;
   }
-
-  @media (max-width: 430px) {
+  @media (max-width: 600px) {
     grid-template-columns: 1fr;
     display: flex;
     flex-direction: column;
@@ -38,5 +37,5 @@
   top: 75px;
   left: 25px;
   border-radius: 10px;
-  z-index: 3;
+  z-index: 5;
 }

@@ -2,13 +2,13 @@
   background-color: #222;
   color: white;
   grid-column: 1 / span 2;
-  height: 20vh;
+  height: 85px;
 
-  @media (max-width: 430px) {
+  @media (max-width: 600px) {
     grid-template-columns: 1fr;
     display: flex;
     flex-direction: column;
-    height: 10vh;
+    height: 85px;
   }
 }
 
@@ -48,7 +48,8 @@
   justify-self: flex-start;
   display: flex;
   flex-direction: row;
-
+  max-width: calc(100vw / 2 - 100px);
+  overflow: hidden; 
   img {
     max-height: 75px;
   }
@@ -58,13 +59,17 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
+    @media (max-width: 600px) {
+      display: none;
+    }
     h1 {
+      text-overflow: ellipsis;
       font-weight: 600;
       font-size: 18px;
       margin-bottom: 5px;
     }
-
     h2 {
+      text-overflow: ellipsis;
       font-weight: 400;
       font-size: 16px;
     }

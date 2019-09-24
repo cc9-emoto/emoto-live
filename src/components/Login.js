@@ -175,7 +175,7 @@ const Login = () => {
 
       <div className="bottom">
         <p>
-          Copyright <span>©</span>️ Emoto 2019
+          Copyright &copy;️ Emoto 2019
         </p>
       </div>
     </div>

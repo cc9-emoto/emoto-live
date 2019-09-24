@@ -3,8 +3,9 @@
   overflow: scroll;
   background-color: #222;
   padding-top: 25px;
+  position: relative;
 
-  @media (max-width: 430px) {
+  @media (max-width: 600px) {
     grid-template-columns: 1fr;
     display: flex;
     flex-direction: column;
