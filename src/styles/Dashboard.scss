@@ -22,6 +22,12 @@
   align-items: center;
   justify-content: center;
   position: relative;
+
+  @media (max-width: 1000px) {
+    display: flex;
+    flex-direction: column;
+    background-color: black;
+  }
 }
 
 .dashboard__emotionValue {

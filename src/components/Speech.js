@@ -1,5 +1,7 @@
 import React, { useEffect } from "react";
 import "../styles/Speech.scss";
+import Cookies from "js-cookie";
+import Spotify from "../helpers/Spotify";
 
 const SpeechRecognition =
   window.SpeechRecognition || window.webkitSpeechRecognition;
@@ -13,22 +15,29 @@ const Speech = ({ player, voiceLang, setVoiceLang }) => {
     handleListen();
   }, [voiceLang]);
 
+  const secretPlay = async () => {
+    const token = Cookies.get("emoto-access");
+    const deviceId = player.current._options.id;
+    await Spotify.startSecretTrack({ token, deviceId });
+  };
+
   const handleListen = async () => {
     await recognition.start();
     recognition.onresult = async e => {
       const text = e.results[e.resultIndex][0].transcript;
-      console.log(text);
       if (
         text.toLowerCase().includes("stop") ||
         text.includes("ポーズ") ||
         text.includes("止まれ") ||
         text.includes("ストップ")
       ) {
-        console.log("STOP");
         player.current.pause();
       }
-      if (text.toLowerCase().includes("play") || text.toLowerCase().includes("start") || text.includes("スタート")) {
-        console.log("PLAY");
+      if (
+        text.toLowerCase().includes("play") ||
+        text.toLowerCase().includes("start") ||
+        text.includes("スタート")
+      ) {
         player.current.resume();
       }
       if (
@@ -37,12 +46,14 @@ const Speech = ({ player, voiceLang, setVoiceLang }) => {
         text.includes("スキップ") ||
         text.includes("次")
       ) {
-        console.log("SKIP");
         player.current.nextTrack();
       }
       if (text.toLowerCase().includes("back") || text.includes("戻れ")) {
-        console.log("BACK");
         player.current.previousTrack();
+      }
+      if (text.toLowerCase().includes("police please")) {
+        console.log("police response");
+        secretPlay();
       }
     };
   };
@@ -51,14 +62,14 @@ const Speech = ({ player, voiceLang, setVoiceLang }) => {
     <div className="speech">
       <button
         className="speech__button"
-        aria-selected={voiceLang === "en-US"}
+        aria-expanded={voiceLang === "en-US"}
         onClick={() => setVoiceLang("en-US")}
       >
         EN
       </button>
       <button
         className="speech__button"
-        aria-selected={voiceLang === "ja-JP"}
+        aria-expanded={voiceLang === "ja-JP"}
         onClick={() => setVoiceLang("ja-JP")}
       >
         JP

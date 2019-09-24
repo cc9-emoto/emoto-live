@@ -14,7 +14,7 @@ const App = () => {
       <Route path="/dashboard" component={Dashboard} />
       <Route path="/callback" component={Callback} />
     </Router>
-  )
+  );
 };
 
 export default App;

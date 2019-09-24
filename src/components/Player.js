@@ -65,8 +65,16 @@ const Player = ({
     player.current.addListener("player_state_changed", async state => {
       if (state && state.position > state.duration - 300 && state.paused) {
         await getNextSong();
+<<<<<<< HEAD
         setOffset((prevProps) => prevProps + 1);
         Spotify.playMusic({ device_id: player.current._options.id, offset: offset + 1, token, playlist });
+=======
+        setOffset(prevProps => prevProps + 1);
+        playMusic({
+          device_id: player.current._options.id,
+          offset: offset + 1
+        });
+>>>>>>> master
       }
       if (state === null) Spotify.playMusic({ device_id: player.current._options.id, offset, token, playlist });
     });
@@ -85,14 +93,14 @@ const Player = ({
   };
 
   const nextTrack = async () => {
-    setOffset((prevProps) => prevProps + 1);
+    setOffset(prevProps => prevProps + 1);
     if (playerState.track_window.next_tracks.length === 0) {
       await getNextSong();
       const token = Cookies.get("emoto-access");
       Spotify.playMusic({ device_id: player.current._options.id, offset: offset + 1, token, playlist });
     }
-    player.current.nextTrack()
-  }
+    player.current.nextTrack();
+  };
 
   if (playerState && playlist) {
     const { position, duration, paused } = playerState;
