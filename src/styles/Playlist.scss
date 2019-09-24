@@ -4,6 +4,13 @@
   background-color: #222;
   padding-top: 25px;
   position: relative;
+  overflow-y: scroll;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none;  /* IE 10+ */
+  &::-webkit-scrollbar { /* WebKit */
+    width: 0;
+    height: 0;
+  }
 
   @media (max-width: 600px) {
     grid-template-columns: 1fr;

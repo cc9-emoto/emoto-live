@@ -1,17 +1,17 @@
 .login {
-  height: 100vh;
-  width: 100vw;
+  overflow: hidden;
   color: white;
 
   .navbar {
     height: 75px;
-    width: 100vw;
+    width: 100%;
     background-color: black;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
     padding: 0 25px;
+    overflow: hidden;
 
     @media (max-width: 430px) {
       padding: 0 5%;
@@ -228,6 +228,7 @@
   }
 
   .team {
+    max-width: 100%;
     height: auto;
     background-position: center;
     background-color: #222;
