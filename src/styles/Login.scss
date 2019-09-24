@@ -78,7 +78,7 @@
 
     @media (max-width: 430px) {
       height: 100vh;
-      padding: 0 10% 20% 10%;
+      padding: 10% 10% 20% 10%;
     }
 
     h1 {
@@ -281,8 +281,19 @@
           background-size: cover;
           background-position: center;
 
+          @media (max-width: 1200px) {
+            width: 240px;
+            border-radius: 240px;
+          }
+
+          @media (max-width: 540px) {
+            width: 200px;
+            border-radius: 200px;
+          }
+
           @media (max-width: 430px) {
-            width: 100%;
+            width: 120px;
+            border-radius: 120px;
           }
         }
 
