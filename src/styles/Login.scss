@@ -242,7 +242,7 @@
       margin-top: 40px;
     }
 
-    .faces {
+    .team__faces {
       padding: 0px;
       margin: 15px;
       display: flex;
@@ -265,25 +265,25 @@
         grid-column-gap: 15px;
         grid-row-gap: 15px;
       }
-    }
 
-    .description__person {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      margin-right: 12px;
-      margin-left: 12px;
+      .team__facesBtns--wrapper {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin-right: 12px;
+        margin-left: 12px;
 
-      .team__head {
-        width: 280px;
-        padding-top: 100%;
-        border-radius: 280px;
-        background-size: cover;
-        background-position: center;
+        .face {
+          width: 280px;
+          padding-top: 100%;
+          border-radius: 280px;
+          background-size: cover;
+          background-position: center;
 
-        @media (max-width: 430px) {
-          width: 100%;
+          @media (max-width: 430px) {
+            width: 100%;
+          }
         }
 
         .team__btn {
