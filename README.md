@@ -9,17 +9,17 @@
 
 ## Tech used
 - React
-- Spotify.API
-- MS Azure
 - IndexedDB
 - AWS Lambda functions
+- Spotify.API
+- MS Azure
 - Three.js
 - Anime.js
 
 
 ## How to use
 
-- Access Link(https://www.emoto.live/)
-- Login (It requires you to register premium account of Spotify)
-- Enjoy music!
-- Emoto detecs your emotion and apply to visualization and choose songs
+- Access our landing page (https://www.emoto.live/)
+- Login with Spotify (Requires Spotify Premium)
+- Enjoy the music!
+- The app automatically detecs your emotion and chooses songs for you
