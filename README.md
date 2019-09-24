@@ -4,7 +4,7 @@
 
 ## Key features
 - Visualize your music
-- Control music with your voice (2 languages applicable(EN, JP))
+- Control music with your voice (2 languages available(EN, JP))
 - Powered by AI Facial Analysis
 
 ## Tech used
