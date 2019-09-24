@@ -1,5 +1,4 @@
 import React from "react";
-// import axiosConfig from "../helpers/axiosConfig.js";
 import axios from "axios";
 import "../styles/Login.scss";
 import "animate.css";
@@ -16,7 +15,6 @@ AOS.init();
 
 const Login = () => {
   const handleLogin = async () => {
-    // const response = await axiosConfig.get("/spotify/authorize");
     const response = await axios.get(
       "https://hur7tfyff1.execute-api.us-east-2.amazonaws.com/Prod/spotify/authorization",
       {
@@ -35,11 +33,7 @@ const Login = () => {
           <img src={emotologo} alt="emoto" />
           <h1 className="navbar__appname">Emoto</h1>
         </div>
-        <button
-          type="button"
-          className="navbar__btn btn btn-lg"
-          onClick={handleLogin}
-        >
+        <button className="navbar__btn" onClick={handleLogin}>
           <img src={spotifyLogo} />
           Login
         </button>
@@ -47,18 +41,18 @@ const Login = () => {
 
       <section className="home">
         <div className="home__description animated fadeInDown delay-1s">
-            <h1 className="home__description--big">Music for every emotion.</h1>
-            <p className="home__description--small">
-              Infinite music recommendations, <br /> powered by facial recognition
-            </p>
-            <button className="home__loginBtn" onClick={handleLogin} >
-              <img src={spotifyLogo} />
-              <div className="home__loginBtnText" >
-                <h2>Login with Spotify</h2>
-                <small>(Requires Spotify Premium)</small>
-              </div>
-            </button>
-          </div>
+          <h1 className="home__description--big">Music for every emotion.</h1>
+          <p className="home__description--small">
+            Infinite music recommendations, <br /> powered by facial recognition
+          </p>
+          <button className="home__loginBtn" onClick={handleLogin}>
+            <img src={spotifyLogo} />
+            <div className="home__loginBtnText">
+              <h2>Login with Spotify</h2>
+              <small>(Requires Spotify Premium)</small>
+            </div>
+          </button>
+        </div>
       </section>
 
       <section className="visual">
@@ -75,16 +69,16 @@ const Login = () => {
       </section>
 
       <section className="speaker">
-      <div data-aos="fade-left" className="description" >
-        <p className="description__detail">
-          Always-on voice recognition <br />
-          listening to your every command.
-        </p>
-        <h1 className="description__emoto">
-          Control music <br />
-          with your voice.
-        </h1>
-      </div>
+        <div data-aos="fade-left" className="description">
+          <p className="description__detail">
+            Always-on voice recognition <br />
+            listening to your every command.
+          </p>
+          <h1 className="description__emoto">
+            Control music <br />
+            with your voice.
+          </h1>
+        </div>
       </section>
 
       <section className="ai">
@@ -101,22 +95,19 @@ const Login = () => {
       </section>
 
       <section className="team">
-        <div data-aos="fade-right" className="description">
-          <h1 className="description__emoto">Meet the team.</h1>
-        </div>
-        <div className="faces">
-          <div data-aos="fade-up" className="description__person wilson">
+        <h1 data-aos="fade-down" className="team__description">
+          Meet the team.
+        </h1>
+        <div className="team__faces">
+          <div data-aos="fade-up" className="team__facesBtns--wrapper">
             <div
-              className="team__head"
+              className="face"
               style={{ backgroundImage: `url(${wilson})` }}
             ></div>
             <button
               className="team__btn"
               onClick={() => {
-                window.open(
-                  "https://www.linkedin.com/in/wilsonplau",
-                  "_blank"
-                );
+                window.open("https://www.linkedin.com/in/wilsonplau", "_blank");
               }}
             >
               Wilson
@@ -125,10 +116,10 @@ const Login = () => {
           <div
             data-aos="fade-up"
             data-aos-delay="200"
-            className="description__person matt"
+            className="team__facesBtns--wrapper"
           >
             <div
-              className="team__head matt"
+              className="face"
               style={{ backgroundImage: `url(${matt})` }}
             ></div>
             <button
@@ -143,19 +134,16 @@ const Login = () => {
           <div
             data-aos="fade-up"
             data-aos-delay="400"
-            className="description__person go"
+            className="team__facesBtns--wrapper"
           >
             <div
-              className="team__head"
+              className="face"
               style={{ backgroundImage: `url(${go})` }}
             ></div>
             <button
               className="team__btn"
               onClick={() => {
-                window.open(
-                  "https://www.linkedin.com/in/go-nakano/",
-                  "_blank"
-                );
+                window.open("https://www.linkedin.com/in/go-nakano/", "_blank");
               }}
             >
               Go
@@ -164,10 +152,10 @@ const Login = () => {
           <div
             data-aos="fade-up"
             data-aos-delay="600"
-            className="description__person rina"
+            className="team__facesBtns--wrapper"
           >
             <div
-              className="team__head"
+              className="face"
               style={{ backgroundImage: `url(${rina})` }}
             ></div>
             <button
