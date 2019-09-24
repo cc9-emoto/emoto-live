@@ -3,6 +3,7 @@ import Player from "./Player";
 import Cookies from "js-cookie";
 
 import "../styles/Dashboard.scss";
+import "../styles/Playlist.scss";
 import colorHelper from "../helpers/colorHelper";
 import VisualizationToggle from "../components/VisualizationToggle";
 import Playlist from "../components/Playlist";
@@ -16,7 +17,7 @@ import VisualizationE from "../components/VisualizationE";
 import VisualizationF from "../components/VisualizationF";
 import playlistHelper from "../helpers/playlistHelper";
 
-import initData from '../data.json'
+import initData from "../data.json";
 import Spotify from "../helpers/Spotify";
 import Camera from "../components/Camera";
 
@@ -24,7 +25,7 @@ const Dashboard = () => {
   const [playerState, setPlayerState] = useState();
   const [emotionValue, setEmotionValue] = useState(0.5);
   const [vis, setVis] = useState(1);
-  const [songs, setSongs] = useState();
+  const [songs, setSongs] = useState([]);
   const [playlist, setPlaylist] = useState(null);
   const [data, setData] = useState(initData);
   const [color, setColor] = useState("FFFFFF");
@@ -51,7 +52,7 @@ const Dashboard = () => {
       token,
       playlistId: playlist
     });
-    if (res.items.length === 0) getNextSong()
+    if (res.items.length === 0) getNextSong();
     const tracks = res.items.map(item => item.track.id);
     const newData = await Spotify.getAudioAnalysis({ id: tracks[0], token });
     if (newData) setData(newData);
@@ -71,17 +72,24 @@ const Dashboard = () => {
   };
 
   const getNextSong = async () => {
-    console.log("GET NEXT SONG");
     let filteredSongs = await db.songs.filter(song => !song.played).toArray();
     const token = Cookies.get("emoto-access");
     if (filteredSongs.length === 0 && offset > 0) {
-      const [oneSong] = await db.songs.limit(1).toArray() && [{id: "3NPiANHZYahLZhUT00GwTw" }]; 
-      const recommended = await Spotify.getRecommended({token}, oneSong);
-      const dataWithPlayed = recommended.map(song => ({ ...song, played: false }));
+      const [oneSong] = (await db.songs.limit(1).toArray()) && [
+        { id: "3NPiANHZYahLZhUT00GwTw" }
+      ];
+      const recommended = await Spotify.getRecommended({ token }, oneSong);
+      const dataWithPlayed = recommended.map(song => ({
+        ...song,
+        played: false
+      }));
       await db.songs.bulkAdd(dataWithPlayed);
       filteredSongs = await db.songs.filter(song => !song.played).toArray();
     }
-    const newSong = await playlistHelper.getNextSong({ emotionValue, songs: filteredSongs });
+    const newSong = await playlistHelper.getNextSong({
+      emotionValue,
+      songs: filteredSongs
+    });
     db.songs.update(newSong.id, { played: true });
     await Spotify.addToPlaylist({
       songId: newSong.id,
@@ -99,7 +107,7 @@ const Dashboard = () => {
       const token = Cookies.get("emoto-access");
       const data = await Spotify.getTopTracks({ token });
       const dataWithPlayed = data.map(song => ({ ...song, played: false }));
-      const res = await db.songs.bulkAdd(dataWithPlayed);
+      await db.songs.bulkAdd(dataWithPlayed);
       setSongs(data);
     }
   };
@@ -109,7 +117,7 @@ const Dashboard = () => {
       <div className="dashboard__main">
         <VisualizationToggle vis={vis} setVis={setVis} />
         <div className="dashboard__emotionValue">{emotionValue.toFixed(2)}</div>
-        <Camera setEmotionValue={setEmotionValue} />
+        <Camera setEmotionValue={setEmotionValue} emotionValue={emotionValue} />
         <Speech
           player={player}
           voiceLang={voiceLang}
@@ -164,6 +172,10 @@ const Dashboard = () => {
         upcoming={playerState ? playerState.track_window.next_tracks : []}
         previous={playerState ? playerState.track_window.previous_tracks : []}
         current={playerState ? playerState.track_window.current_track : null}
+        offset={offset}
+        setOffset={setOffset}
+        player={player}
+        playlist={playlist}
       />
       <Player
         getNextSong={getNextSong}

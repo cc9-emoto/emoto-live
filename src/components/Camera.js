@@ -17,7 +17,6 @@ const Camera = ({ setEmotionValue }) => {
       "https://d3swd275y6.execute-api.us-east-2.amazonaws.com/default/face_recognition2",
       base64Data
     );
-    console.log(response.data);
     return response.data;
   };
 
@@ -26,12 +25,6 @@ const Camera = ({ setEmotionValue }) => {
     const feelings = await submitData(webcamData);
     setEmotionValue(feelings.happiness + 0.5 * feelings.neutral);
   };
-
-  const getNextSong = async () => {
-    const webcamData = webcam.current.getScreenshot();
-    const feelings = await submitData(webcamData);
-  };
-
   return (
     <div className="camera">
       <Webcam

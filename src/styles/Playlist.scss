@@ -1,5 +1,4 @@
 .playlist {
-  position: relative;
   height: calc(100vh - 85px);
   overflow: scroll;
   background-color: #222;
@@ -22,6 +21,10 @@
       padding: 10px;
       font-size: 12px;
     }
+  }
+
+  img:hover {
+    cursor: pointer;
   }
 }
 

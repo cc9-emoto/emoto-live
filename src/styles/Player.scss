@@ -58,7 +58,6 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-
     h1 {
       font-weight: 600;
       font-size: 18px;
@@ -73,6 +72,7 @@
 }
 
 .player__controls {
+  z-index: 2;
   button {
     outline: none;
   }

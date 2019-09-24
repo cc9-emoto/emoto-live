@@ -6,7 +6,6 @@ const playlistHelper = {
       if (diffA > diffB) return 1;
       return -1;
     });
-    console.log(sortedSongs);
     return sortedSongs[0];
   }
 };

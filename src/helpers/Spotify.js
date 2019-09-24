@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const Spotify = {
-  processSongs:  async ( token, tracks ) => {
+  processSongs: async (token, tracks) => {
     const trackIds = tracks.map(song => song.id).join(",");
     const trackDataResponse = await axios.get(
       `https://api.spotify.com/v1/audio-features/?ids=${trackIds}`,
@@ -18,10 +18,9 @@ const Spotify = {
       };
     });
     return topTrackData;
-  }, 
+  },
   getAudioAnalysis: async ({ id, token }) => {
     if (id === undefined) return;
-    console.log("getAudioAnalysis");
     try {
       const res = await axios.get(
         `https://api.spotify.com/v1/audio-analysis/${id}`,
@@ -80,13 +79,44 @@ const Spotify = {
     const topTrackData = await Spotify.processSongs(token, tracks.data.items);
     return topTrackData;
   },
-  getRecommended: async ( { token, id } ) => {
-    const tracks = await axios.get(`https://api.spotify.com/v1/recommendations?seed_tracks=${id}`,
-    { headers: { Authorization: `Bearer ${token}` } });
-    console.log(tracks.data.tracks);
-    const recommendedData = await Spotify.processSongs(token, tracks.data.tracks)
+  startSecretTrack: async ({ token, deviceId }) => {
+    const uris = [
+      "spotify:track:3Y6XWs8xMlCngyIxNOFnsp",
+      "spotify:track:0qeKzbUsW0V4ZWRJrHNiD3",
+      "spotify:track:5AIbPmGJyxtXlabJHZtowQ"
+    ];
+    const res = await axios.put(
+      `https://api.spotify.com/v1/me/player/play?device_id=${deviceId}`,
+      { uris },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      }
+    );
+    return res.data;
+  },
+  getRecommended: async ({ token, id }) => {
+    const tracks = await axios.get(
+      `https://api.spotify.com/v1/recommendations?seed_tracks=${id}`,
+      { headers: { Authorization: `Bearer ${token}` } }
+    );
+    const recommendedData = await Spotify.processSongs(
+      token,
+      tracks.data.tracks
+    );
     return recommendedData;
-  }
+  },
+  playMusic: async ({ device_id, offset = 0, token, playlist }) => {
+    await axios.put(
+      `https://api.spotify.com/v1/me/player/play?device_id=${device_id}`,
+      {
+        context_uri: `spotify:playlist:${playlist}`,
+        offset: { position: offset }
+      },
+      { headers: { Authorization: `Bearer ${token}` } }
+    );
+  },
 };
 
 export default Spotify;
