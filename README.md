@@ -3,19 +3,23 @@
 <h1>Music App detects your emotion</h1>
 
 ## Key features
-- Visualize your music
-- Control music with your voice (2 languages available(EN, JP))
+- Visualizes your music based on your emotion
+- Controls music with your voice (2 languages available(EN, JP))
 - Powered by AI Facial Analysis
 
 ## Tech used
+- React
 - Spotify.API
 - MS Azure
-- IndexDB
-- AWS lambda
+- IndexedDB
+- AWS Lambda functions
+- Three.js
+- Anime.js
+
 
 ## How to use
 
-- Access Link
+- Access Link(https://www.emoto.live/)
 - Login (It requires you to register premium account of Spotify)
 - Enjoy music!
 - Emoto detecs your emotion and apply to visualization and choose songs
