@@ -25,7 +25,7 @@ const Dashboard = () => {
   const [playerState, setPlayerState] = useState();
   const [emotionValue, setEmotionValue] = useState(0.5);
   const [vis, setVis] = useState(1);
-  const [songs, setSongs] = useState([]);
+  const [songs, setSongs] = useState();
   const [playlist, setPlaylist] = useState(null);
   const [data, setData] = useState(initData);
   const [color, setColor] = useState("FFFFFF");
