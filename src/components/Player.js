@@ -65,16 +65,8 @@ const Player = ({
     player.current.addListener("player_state_changed", async state => {
       if (state && state.position > state.duration - 300 && state.paused) {
         await getNextSong();
-<<<<<<< HEAD
         setOffset((prevProps) => prevProps + 1);
         Spotify.playMusic({ device_id: player.current._options.id, offset: offset + 1, token, playlist });
-=======
-        setOffset(prevProps => prevProps + 1);
-        playMusic({
-          device_id: player.current._options.id,
-          offset: offset + 1
-        });
->>>>>>> master
       }
       if (state === null) Spotify.playMusic({ device_id: player.current._options.id, offset, token, playlist });
     });
