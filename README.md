@@ -1,6 +1,6 @@
 <img width="990" alt="header" src="https://user-images.githubusercontent.com/44974307/65474625-87c92a80-deb7-11e9-9889-d203aade2068.png">
 <p align="center">
-<img width="800" alt="portfolio_view" src="https://media.giphy.com/media/Ifh33B9r8xd6hTDdyx/giphy.gif">
+<img width="1000" alt="portfolio_view" src="https://media.giphy.com/media/Ifh33B9r8xd6hTDdyx/giphy.gif">
 </p>
 
 <h1>Emoto</h1>
