@@ -6,7 +6,7 @@
     "animate.css": "^3.7.2",
     "animejs": "^3.1.0",
     "aos": "^2.3.4",
-    "axios": "^0.19.0",
+    "axios": "^0.21.1",
     "bootstrap": "4",
     "dexie": "^2.0.4",
     "electron-is-dev": "^1.1.0",
